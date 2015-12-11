@@ -7,7 +7,7 @@ Template.twitterTimeline.helpers({
     data: function () {
         var t = Tweets.findOne({owner: Meteor.userId()});
         if (t) {
-            return t.data.sort(function (a, b) {
+            return t.data.slice().sort(function (a, b) {
                 a = new Date(a.created_at);
                 b = new Date(b.created_at);
                 return a > b ? -1 : a < b ? 1 : 0;
