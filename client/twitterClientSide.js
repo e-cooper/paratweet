@@ -2,12 +2,16 @@ Meteor.subscribe("tweets");
 
 Template.twitterTimeline.helpers({
     rawData: function () {
-        return JSON.stringify(Tweets.findOne(), null, 2);
+        return JSON.stringify(Tweets.findOne({owner: Meteor.userId()}), null, 2);
     },
     data: function () {
-        var t = Tweets.findOne();
+        var t = Tweets.findOne({owner: Meteor.userId()});
         if (t) {
-            return t.data;
+            return t.data.sort(function (a, b) {
+                a = new Date(a.created_at);
+                b = new Date(b.created_at);
+                return a > b ? -1 : a < b ? 1 : 0;
+            });
         }
     }
 });
