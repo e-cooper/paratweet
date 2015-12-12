@@ -1,10 +1,15 @@
 Meteor.publish("tweets", function () {
-    var user = null;
     if (this.userId) {
-        user = Meteor.users.findOne(this.userId);
+        Meteor.call("getTweets", Meteor.users.findOne(this.userId));
     }
-    Meteor.call("getTweets", user);
     return Tweets.find({owner: this.userId});
+});
+
+Meteor.publish("messages", function () {
+    if (this.userId) {
+        Meteor.call("getMessages", Meteor.users.findOne(this.userId));
+    }
+    return Messages.find({owner: this.userId});
 });
 
 // Try to update the tweets for all of the users that are using the app
@@ -17,8 +22,8 @@ function myTask() {
 
     for (let u of userIds) {
         var user = Meteor.users.findOne(u);
-        var tweetsForUser = Tweets.findOne({owner: u});
         Meteor.call("getTweets", user);
+        Meteor.call("getMessages", user);
     }
     Meteor.setTimeout(myTask, interval);
 }

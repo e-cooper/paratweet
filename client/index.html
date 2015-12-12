@@ -6,6 +6,13 @@
 
 <body>
   {{> loginButtons}}
-  {{> postTweetButton}}
-  {{> twitterTimeline}}
+  {{#if currentUser}}
+    {{> postTweetButton}}
+    {{> showMessagesButton}}
+    {{#if showMessages}}
+      {{> twitterMessages}}
+    {{else}}
+      {{> twitterTimeline}}
+    {{/if}}
+  {{/if}}
 </body>
