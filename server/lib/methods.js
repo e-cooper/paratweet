@@ -48,9 +48,10 @@ Meteor.methods({
 
                     _.each(data, function (tweet) {
                         Tweets.insert({
-                            content: tweet,
                             createdAt: timestamp,
                             owner: user._id,
+                            pending: true,
+                            content: tweet
                         });
                     });
                 }
@@ -58,5 +59,10 @@ Meteor.methods({
         } else {
             throw new Meteor.Error("not-authorized");
         }
+    },
+    setPending: function () {
+        Tweets.find({owner: Meteor.userId(), pending: {$ne: false}}).forEach(function (tweet) {
+            Tweets.update(tweet._id, {$set: {pending: false}});
+        });
     }
 });

@@ -10,6 +10,15 @@ Template.twitterTimeline.helpers({
     },
     tweets: function () {
         return Tweets.find({owner: Meteor.userId()}, {sort: {createdAt: -1}});
+    },
+    pendingTweetCount: function () {
+        return Tweets.find({owner: Meteor.userId(), pending: {$ne: false}}).count();
+    }
+});
+
+Template.twitterTimeline.events({
+    "click .pending": function () {
+        Meteor.call("setPending");
     }
 });
 
