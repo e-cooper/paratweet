@@ -1,10 +1,5 @@
 Meteor.subscribe("tweets");
 
-Pages = new Meteor.Pagination(Tweets, {
-    itemTemplate: "tweet",
-    templateName: "twitterTimeline"
-});
-
 Template.twitterTimeline.helpers({
     rawData: function () {
         var tweetArr = new Array();
@@ -20,6 +15,6 @@ Template.twitterTimeline.helpers({
 
 Template.postTweetButton.events({
     "click .postTweet": function () {
-        Meteor.call("postTweet", "This is a tweet!");
+        Meteor.call("postTweet", "This is a tweet!" + new Date());
     }
 });
