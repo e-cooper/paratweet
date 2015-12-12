@@ -7,6 +7,8 @@ Meteor.publish("tweets", function () {
     return Tweets.find({owner: this.userId});
 });
 
+Pages = new Meteor.Pagination(Tweets);
+
 // Try to update the tweets for all of the users that are using the app
 // every 60 seconds
 var interval = 60 * 1000; // 60 seconds

@@ -1,15 +1,7 @@
 <template name="twitterTimeline">
   <h1>Tweets</h1>
-  {{#each data}}
-    <h4>{{created_at}}</h4>
-    <ul>
-      <li><strong>Text: </strong>{{text}}</li>
-      <li><strong>Source: </strong>{{source}}</li>
-      <li><strong>User: </strong>{{user.name}}</li>
-    </ul>
-  {{else}}
-    <p>Waiting for data...</p>
-  {{/each}}
+  {{> pages}}
+  {{> pagesNav}}
 
   <pre>{{rawData}}</pre>
 </template>

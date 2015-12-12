@@ -1,18 +1,20 @@
 Meteor.subscribe("tweets");
 
+Pages = new Meteor.Pagination(Tweets, {
+    itemTemplate: "tweet",
+    templateName: "twitterTimeline"
+});
+
 Template.twitterTimeline.helpers({
     rawData: function () {
-        return JSON.stringify(Tweets.findOne({owner: Meteor.userId()}), null, 2);
+        var tweetArr = new Array();
+        Tweets.find({owner: Meteor.userId()}).forEach(function (tweet) {
+            tweetArr.push(JSON.stringify(tweet, null, 2));
+        });
+        return tweetArr;
     },
-    data: function () {
-        var t = Tweets.findOne({owner: Meteor.userId()});
-        if (t) {
-            return t.data.slice().sort(function (a, b) {
-                a = new Date(a.created_at);
-                b = new Date(b.created_at);
-                return a > b ? -1 : a < b ? 1 : 0;
-            });
-        }
+    tweets: function () {
+        return Tweets.find({owner: Meteor.userId()}, {sort: {createdAt: -1}});
     }
 });
 

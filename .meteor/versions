@@ -4,6 +4,7 @@ accounts-oauth@1.1.8
 accounts-twitter@1.0.6
 accounts-ui@1.1.6
 accounts-ui-unstyled@1.1.8
+alethes:pages@1.8.4
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -44,6 +45,7 @@ localstorage@1.0.5
 logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
+meteor-platform@1.2.3
 meteorhacks:async@1.0.0
 meteorhacks:npm@1.5.0
 minifiers@1.1.7
