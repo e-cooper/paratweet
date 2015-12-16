@@ -1,17 +1,35 @@
 Meteor.methods({
-    postTweet: function (text) {
+    postTweet: function (text, replyIdStr) {
         if (!Meteor.userId()) {
             throw new Meteor.Error("not-authorized");
         }
 
-        T.post('statuses/update', { status: text }, function (err, data, response) {
+        var T = new Twit({
+            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
+            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            access_token:         Meteor.user().services.twitter.accessToken,
+            access_token_secret:  Meteor.user().services.twitter.accessTokenSecret
+        });
+
+        T.post('statuses/update', {
+            status: text,
+            in_reply_to_status_id: replyIdStr
+        }, function (err, data, response) {
             console.log(err);
             console.log(data);
             console.log(response);
         });
     },
     getTweets: function (user) {
-        var lastFetch, lastTweet, sinceId, timestamp;
+        var T, lastFetch, lastTweet, sinceId, timestamp;
+
+        T = new Twit({
+            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
+            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            access_token:         user.services.twitter.accessToken,
+            access_token_secret:  user.services.twitter.accessTokenSecret
+        });
+
         lastFetch = Fetches.findOne({owner: user._id, type: 'Tweets'}, {sort: {createdAt: -1}})
 
         // Try to mitigate people hitting the rate limit by denying them
@@ -55,7 +73,15 @@ Meteor.methods({
         }));
     },
     getMessages: function (user) {
-        var lastFetch, lastMessage, sinceId, timestamp;
+        var T, lastFetch, lastMessage, sinceId, timestamp;
+
+        T = new Twit({
+            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
+            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            access_token:         user.services.twitter.accessToken,
+            access_token_secret:  user.services.twitter.accessTokenSecret
+        });
+
         lastFetch = Fetches.findOne({owner: user._id, type: 'Messages'}, {sort: {createdAt: -1}})
 
         // Try to mitigate people hitting the rate limit by denying them

@@ -1,7 +1,22 @@
 Meteor.subscribe("tweets");
 Meteor.subscribe("messages");
 
+// modal stuff
+
+Template.modal.helpers({
+    activeModal: function () {
+        return Session.get('activeModal');
+    },
+    modalData: function () {
+
+    }
+});
+
 // Timeline stuff
+
+Template.twitterTimeline.onRendered(function () {
+    Meteor.call("setPending", "Tweets");
+});
 
 Template.twitterTimeline.helpers({
     rawData: function () {
@@ -23,15 +38,73 @@ Template.twitterTimeline.events({
     }
 });
 
-Template.twitterTimeline.onRendered(function () {
-    Meteor.call("setPending", "Tweets");
-});
-
 // Tweet stuff
 
 Template.tweet.helpers({
     replies: function () {
-        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str});
+        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str, pending: {$ne: true}}, {sort: {createdAt: -1}});
+    }
+});
+
+Template.tweet.events({
+    "click button.modal": function (event, template) {
+        var name = template.$(event.target).data('modal-template');
+        Session.set('activeModal', name);
+        Session.set('replyScreenName', this.content.user.screen_name);
+        Session.set('replyIdStr', this.content.id_str);
+    }
+});
+
+// reply stuff
+
+Template.reply.helpers({
+    replies: function () {
+        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str, pending: {$ne: true}}, {sort: {createdAt: -1}});
+    }
+});
+
+Template.reply.events({
+    "click button.modal": function (event, template) {
+        var name = template.$(event.target).data('modal-template');
+        Session.set('activeModal', name);
+        Session.set('replyScreenName', this.content.user.screen_name);
+        Session.set('replyIdStr', this.content.id_str);
+    }
+});
+
+// postReplyModal stuff
+
+Template.postReplyModal.onCreated(function () {
+    this.charCount = new ReactiveVar();
+    this.charCount.set(0);
+});
+
+Template.postReplyModal.onRendered(function () {
+    $('textarea#tweetBox').val('@' + Session.get('replyScreenName') + ' ');
+    this.charCount.set(TwitterText.getTweetLength($('textarea#tweetBox').val()));
+});
+
+Template.postReplyModal.helpers({
+    remainingCharCount: function () {
+        return 140 - Template.instance().charCount.get();
+    }
+});
+
+Template.postReplyModal.events({
+    "click .postTweet": function (event, template) {
+        if (template.charCount.get() > 0 && template.charCount.get() <= 140 ) {
+            Meteor.call("postTweet", $('textarea#tweetBox').val(), Session.get('replyIdStr'));
+            $('textarea#tweetBox').val('');
+            Session.set('activeModal', null);
+        } else {
+            console.log("You can't do that man");
+        }
+    },
+    "input textarea#tweetBox": function(event, template) {
+        template.charCount.set(TwitterText.getTweetLength($('textarea#tweetBox').val()));
+    },
+    "click button.closeModal": function () {
+        Session.set('activeModal', null);
     }
 });
 
@@ -62,13 +135,5 @@ Template.twitterMessages.events({
 Template.viewLink.helpers({
     currentlyOnTweets: function () {
         return Router.current().route.getName() === "tweets";
-    }
-});
-
-// postTweetButton stuff
-
-Template.postTweetButton.events({
-    "click .postTweet": function () {
-        Meteor.call("postTweet", "This is a tweet!" + new Date());
     }
 });

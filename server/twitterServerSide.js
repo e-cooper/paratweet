@@ -22,7 +22,9 @@ function myTask() {
 
     for (let u of userIds) {
         var user = Meteor.users.findOne(u);
+        console.log("auto getting tweets");
         Meteor.call("getTweets", user);
+        console.log("auto getting messages");
         Meteor.call("getMessages", user);
     }
     Meteor.setTimeout(myTask, interval);

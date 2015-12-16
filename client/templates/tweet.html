@@ -4,6 +4,7 @@
     <li><strong>Text: </strong>{{content.text}}</li>
     <li><strong>Source: </strong>{{content.source}}</li>
     <li><strong>User: </strong>{{content.user.name}}</li>
+    <li><button class="modal postReply" data-modal-template="postReplyModal">Reply</button></li>
     <li><button class="openTicket">Open Ticket</button></li>
     {{#each replies}}
       {{> reply}}

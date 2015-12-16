@@ -1,0 +1,1 @@
+TwitterText = require('twitter-text');
