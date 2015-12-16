@@ -1,0 +1,12 @@
+<template name="tweet">
+  <h4>{{content.created_at}}</h4>
+  <ul>
+    <li><strong>Text: </strong>{{content.text}}</li>
+    <li><strong>Source: </strong>{{content.source}}</li>
+    <li><strong>User: </strong>{{content.user.name}}</li>
+    <li><button class="openTicket">Open Ticket</button></li>
+    {{#each replies}}
+      {{> reply}}
+    {{/each}}
+  </ul>
+</template>

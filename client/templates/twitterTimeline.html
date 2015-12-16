@@ -1,6 +1,7 @@
 <template name="twitterTimeline">
+  {{> viewLink}}
   <h1>Tweets</h1>
-  <button class="pending">You have {{pendingTweetCount}} new Tweets</button>
+  <button class="pending">Show {{pendingTweetCount}} new Tweets</button>
   {{> pages}}
   {{> pagesNav}}
 

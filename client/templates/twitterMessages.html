@@ -1,6 +1,7 @@
 <template name="twitterMessages">
+  {{> viewLink}}
   <h1>Messages</h1>
-  <button class="pending">You have {{pendingMessageCount}} new Messages</button>
+  <button class="pending">Show {{pendingMessageCount}} new Messages</button>
   {{> pages}}
   {{> pagesNav}}
 

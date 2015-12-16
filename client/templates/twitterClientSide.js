@@ -1,11 +1,7 @@
 Meteor.subscribe("tweets");
 Meteor.subscribe("messages");
 
-Template.body.helpers({
-    showMessages: function () {
-        return Session.get("showMessages");
-    }
-});
+// Timeline stuff
 
 Template.twitterTimeline.helpers({
     rawData: function () {
@@ -21,6 +17,26 @@ Template.twitterTimeline.helpers({
     }
 });
 
+Template.twitterTimeline.events({
+    "click .pending": function () {
+        Meteor.call("setPending", "Tweets");
+    }
+});
+
+Template.twitterTimeline.onRendered(function () {
+    Meteor.call("setPending", "Tweets");
+});
+
+// Tweet stuff
+
+Template.tweet.helpers({
+    replies: function () {
+        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str});
+    }
+});
+
+// Messages stuff
+
 Template.twitterMessages.helpers({
     rawData: function () {
         var arr = new Array();
@@ -35,37 +51,21 @@ Template.twitterMessages.helpers({
     }
 });
 
-Template.showMessagesButton.helpers({
-    messagesOrTweets: function () {
-        if (Session.get("showMessages")) {
-            return "Tweets";
-        } else {
-            return "Messages";
-        }
-    }
-});
-
-Template.showMessagesButton.events({
-    "click .showMessages": function () {
-        if (Session.get("showMessages")) {
-            Session.set("showMessages", false);
-        } else {
-            Session.set("showMessages", true);
-        }
-    }
-});
-
 Template.twitterMessages.events({
     "click .pending": function () {
         Meteor.call("setPending", "Messages");
     }
 });
 
-Template.twitterTimeline.events({
-    "click .pending": function () {
-        Meteor.call("setPending", "Tweets");
+// viewLink stuff
+
+Template.viewLink.helpers({
+    currentlyOnTweets: function () {
+        return Router.current().route.getName() === "tweets";
     }
 });
+
+// postTweetButton stuff
 
 Template.postTweetButton.events({
     "click .postTweet": function () {

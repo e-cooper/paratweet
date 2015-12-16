@@ -1,0 +1,11 @@
+<template name="viewLink">
+  {{#if currentlyOnTweets}}
+    {{#linkTo route="messages"}}
+      View Messages
+    {{/linkTo}}
+  {{else}}
+    {{#linkTo route="tweets"}}
+      View Tweets
+    {{/linkTo}}
+  {{/if}}
+</template>
