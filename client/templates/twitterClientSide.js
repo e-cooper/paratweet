@@ -6,9 +6,6 @@ Meteor.subscribe("messages");
 Template.modal.helpers({
     activeModal: function () {
         return Session.get('activeModal');
-    },
-    modalData: function () {
-
     }
 });
 
@@ -108,7 +105,7 @@ Template.postReplyModal.events({
     }
 });
 
-// Messages stuff
+// twitterMessages stuff
 
 Template.twitterMessages.helpers({
     rawData: function () {
@@ -127,6 +124,38 @@ Template.twitterMessages.helpers({
 Template.twitterMessages.events({
     "click .pending": function () {
         Meteor.call("setPending", "Messages");
+    }
+});
+
+// message stuff
+
+Template.message.events({
+    "click button.modal": function (event, template) {
+        var name = template.$(event.target).data('modal-template');
+        Session.set('activeModal', name);
+        Session.set('replyMessageScreenName', this.content.sender_screen_name);
+        Session.set('replyMessageIdStr', this.content.sender_id_str);
+    }
+});
+
+// postReplyMessageModal stuff
+
+Template.postReplyMessageModal.events({
+    "click .postMessage": function (event, template) {
+        if ($('textarea#messageBox').val().length > 0) {
+            Meteor.call("postMessage",
+                $('textarea#messageBox').val(),
+                Session.get('replyMessageScreenName'),
+                Session.get('replyMessageIdStr')
+            );
+            $('textarea#tweetBox').val('');
+            Session.set('activeModal', null);
+        } else {
+            console.log("You can't do that man");
+        }
+    },
+    "click button.closeModal": function () {
+        Session.set('activeModal', null);
     }
 });
 

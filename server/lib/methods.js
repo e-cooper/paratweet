@@ -20,6 +20,28 @@ Meteor.methods({
             console.log(response);
         });
     },
+    postMessage: function (text, replyScreenName, replyIdStr) {
+        if (!Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        var T = new Twit({
+            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
+            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            access_token:         Meteor.user().services.twitter.accessToken,
+            access_token_secret:  Meteor.user().services.twitter.accessTokenSecret
+        });
+
+        T.post('direct_messages/new', {
+            text: text,
+            screen_name: replyScreenName,
+            user_id: replyIdStr
+        }, function (err, data, response) {
+            console.log("message_sent_error: " + err);
+            console.log("message_sent_data: " + data);
+            console.log("message_sent_response: " + response);
+        });
+    },
     getTweets: function (user) {
         var T, lastFetch, lastTweet, sinceId, timestamp;
 
