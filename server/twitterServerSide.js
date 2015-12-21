@@ -12,21 +12,34 @@ Meteor.publish("messages", function () {
     return Messages.find({owner: this.userId});
 });
 
-// Try to update the tweets for all of the users that are using the app
-// every 60 seconds
+Accounts.onLogin(function () {
+    Meteor.call("setPending", "Tweets");
+    Meteor.call("setPending", "Messages");
+});
+
+Meteor.startup(function () {
+    Meteor.setTimeout(myTask, interval);
+});
+
+// Try to update the tweets for all of the unique logged in users that are
+// using the app every 60 seconds
 var interval = 60 * 1000; // 60 seconds
-function myTask() {
-    var userIds = presences.find({}, {userId: true}).map(function (p) {
+function myTask () {
+    var userIds = presences.find({}, {fields: {userId: true}, sort: {userId: 1}}).map(function (p) {
         return p.userId;
     });
+    var compacted = _.chain(userIds).uniq(true).compact().value();
 
-    for (let u of userIds) {
+    console.log(compacted);
+
+    for (let u of compacted) {
         var user = Meteor.users.findOne(u);
+        // TODO: remove later
         console.log("auto getting tweets");
         Meteor.call("getTweets", user);
+        // TODO: remove later
         console.log("auto getting messages");
         Meteor.call("getMessages", user);
     }
     Meteor.setTimeout(myTask, interval);
 }
-Meteor.setTimeout(myTask, interval);

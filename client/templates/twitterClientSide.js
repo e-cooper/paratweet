@@ -11,7 +11,7 @@ Template.modal.helpers({
 
 // Timeline stuff
 
-Template.twitterTimeline.onRendered(function () {
+Template.twitterTimeline.onCreated(function () {
     Meteor.call("setPending", "Tweets");
 });
 
@@ -39,7 +39,7 @@ Template.twitterTimeline.events({
 
 Template.tweet.helpers({
     replies: function () {
-        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str, pending: {$ne: true}}, {sort: {createdAt: -1}});
+        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str, pending: {$ne: true}}, {sort: {createdAt: 1}});
     }
 });
 
@@ -47,8 +47,7 @@ Template.tweet.events({
     "click button.modal": function (event, template) {
         var name = template.$(event.target).data('modal-template');
         Session.set('activeModal', name);
-        Session.set('replyScreenName', this.content.user.screen_name);
-        Session.set('replyIdStr', this.content.id_str);
+        Session.set('currentTargetContent', this.content);
     }
 });
 
@@ -56,7 +55,7 @@ Template.tweet.events({
 
 Template.reply.helpers({
     replies: function () {
-        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str, pending: {$ne: true}}, {sort: {createdAt: -1}});
+        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str, pending: {$ne: true}}, {sort: {createdAt: 1}});
     }
 });
 
@@ -64,8 +63,7 @@ Template.reply.events({
     "click button.modal": function (event, template) {
         var name = template.$(event.target).data('modal-template');
         Session.set('activeModal', name);
-        Session.set('replyScreenName', this.content.user.screen_name);
-        Session.set('replyIdStr', this.content.id_str);
+        Session.set('currentTargetContent', this.content);
     }
 });
 
@@ -77,7 +75,7 @@ Template.postReplyModal.onCreated(function () {
 });
 
 Template.postReplyModal.onRendered(function () {
-    $('textarea#tweetBox').val('@' + Session.get('replyScreenName') + ' ');
+    $('textarea#tweetBox').val('@' + Session.get('currentTargetContent').user.screen_name + ' ');
     this.charCount.set(TwitterText.getTweetLength($('textarea#tweetBox').val()));
 });
 
@@ -90,7 +88,7 @@ Template.postReplyModal.helpers({
 Template.postReplyModal.events({
     "click .postTweet": function (event, template) {
         if (template.charCount.get() > 0 && template.charCount.get() <= 140 ) {
-            Meteor.call("postTweet", $('textarea#tweetBox').val(), Session.get('replyIdStr'));
+            Meteor.call("postTweet", $('textarea#tweetBox').val(), Session.get('currentTargetContent').id_str);
             $('textarea#tweetBox').val('');
             Session.set('activeModal', null);
         } else {
@@ -133,8 +131,7 @@ Template.message.events({
     "click button.modal": function (event, template) {
         var name = template.$(event.target).data('modal-template');
         Session.set('activeModal', name);
-        Session.set('replyMessageScreenName', this.content.sender_screen_name);
-        Session.set('replyMessageIdStr', this.content.sender_id_str);
+        Session.set('currentTargetContent', this.content);
     }
 });
 
@@ -145,8 +142,8 @@ Template.postReplyMessageModal.events({
         if ($('textarea#messageBox').val().length > 0) {
             Meteor.call("postMessage",
                 $('textarea#messageBox').val(),
-                Session.get('replyMessageScreenName'),
-                Session.get('replyMessageIdStr')
+                Session.get('currentTargetContent').sender_screen_name,
+                Session.get('currentTargetContent').sender_id_str
             );
             $('textarea#tweetBox').val('');
             Session.set('activeModal', null);
@@ -156,6 +153,67 @@ Template.postReplyMessageModal.events({
     },
     "click button.closeModal": function () {
         Session.set('activeModal', null);
+    }
+});
+
+// postTicketModal stuff
+
+Template.postTicketModal.onRendered(function () {
+    if (Session.get('currentTargetContent')) {
+        var description = $('input#ticketDescription');
+        var senderScreenName =
+            (Session.get('currentTargetContent').user)
+            ? Session.get('currentTargetContent').user.screen_name
+            : Session.get('currentTargetContent').sender_screen_name;
+
+        description.val(
+            '"'
+            + Session.get('currentTargetContent').text
+            + '"'
+            + ' - @'
+            + senderScreenName
+        );
+    }
+});
+
+Template.postTicketModal.helpers({
+    proUsers: function () {
+        return Session.get('proUsers');
+    },
+    priorities: function () {
+        return ["Low", "Medium", "High"];
+    }
+});
+
+Template.postTicketModal.events({
+    "change #assignee-select": function (event, template) {
+        var user = $(event.target).val();
+        console.log("user selected: " + user);
+    },
+    "click button.closeModal": function () {
+        Session.set('activeModal', null);
+    },
+    "click .postTicket": function () {
+        if ($('input#ticketSummary').val().length) {
+            card.services('helpdesk').request('ticket:create', {
+                summary: $('input#ticketSummary').val(),
+                description: $('input#ticketDescription').val(),
+                assignee: $('#assignee-select').val(),
+                priority: $('#priority-select').val()
+            }).then(function (data) {
+                // TODO: Add success alert
+                console.log("data: " + data);
+                return data;
+            }, function (error, result) {
+                // TODO: Add error alert
+                console.log("error: " + error);
+                return error;
+            });
+            Session.set('activeModal', null);
+        } else {
+            // TODO: Add form errors?
+            console.log("summary is too short");
+        }
     }
 });
 

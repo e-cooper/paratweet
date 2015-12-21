@@ -30,3 +30,5 @@ iron:router
 npm-container
 reactive-var
 cosmos:browserify
+deanius:promise
+ejson

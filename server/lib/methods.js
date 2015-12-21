@@ -42,6 +42,17 @@ Meteor.methods({
             console.log("message_sent_response: " + response);
         });
     },
+    postTicket: function () {
+        if (!Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        card.services('helpdesk').request('ticket:create', {
+            summary: "This is a test ticket",
+            description: "No description needed",
+            priority: "low"
+        });
+    },
     getTweets: function (user) {
         var T, lastFetch, lastTweet, sinceId, timestamp;
 
