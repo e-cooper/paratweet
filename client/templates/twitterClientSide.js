@@ -37,29 +37,7 @@ Template.twitterTimeline.events({
 
 // Tweet stuff
 
-Template.tweet.helpers({
-    replies: function () {
-        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str, pending: {$ne: true}}, {sort: {createdAt: 1}});
-    }
-});
-
 Template.tweet.events({
-    "click button.modal": function (event, template) {
-        var name = template.$(event.target).data('modal-template');
-        Session.set('activeModal', name);
-        Session.set('currentTargetContent', this.content);
-    }
-});
-
-// reply stuff
-
-Template.reply.helpers({
-    replies: function () {
-        return Tweets.find({"content.in_reply_to_status_id_str": this.content.id_str, pending: {$ne: true}}, {sort: {createdAt: 1}});
-    }
-});
-
-Template.reply.events({
     "click button.modal": function (event, template) {
         var name = template.$(event.target).data('modal-template');
         Session.set('activeModal', name);

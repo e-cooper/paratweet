@@ -78,7 +78,7 @@ Meteor.methods({
             sinceId = lastTweet.content.id_str;
         }
 
-        T.get('statuses/user_timeline', {
+        T.get('statuses/mentions_timeline', {
             screen_name: user.services.twitter.screenName,
             count: 200,
             since_id: sinceId
