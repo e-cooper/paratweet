@@ -1,0 +1,30 @@
+<template name="postTicketCommentModal">
+  <h2>New Ticket Comment</h2>
+  {{#if openTickets}}
+    <label>
+      Ticket
+      <select id="ticket-select">
+        {{#each openTickets}}
+          <option value="{{this.id}}">#{{this.id}} {{this.summary}}</option>
+        {{/each}}
+      </select>
+    </label>
+  {{else}}
+    <pre>Loading...</pre>
+  {{/if}}
+
+  <label>
+    Body
+    <input id="ticketCommentBody" type="text" name="ticketCommentBody"/>
+  </label>
+
+  <label>
+    Public
+    <input id="ticketCommentPublic" type="checkbox" checked />
+  </label>
+
+  <div>
+    <button class="postTicketComment">Create Ticket Comment</button>
+    <button class="closeModal">Close</button>
+  </div>
+</template>
