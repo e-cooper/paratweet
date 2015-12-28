@@ -1,5 +1,3 @@
-Meteor.subscribe('tickets');
-
 Meteor.startup(function () {
     var users, proUsersPromise;
     card = new SW.Card();
