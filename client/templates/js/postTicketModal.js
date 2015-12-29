@@ -41,18 +41,21 @@ Template.postTicketModal.events({
                 assignee: $('#assignee-select').val(),
                 priority: $('#priority-select').val()
             }).then(function (data) {
-                // TODO: Add success alert
-                console.log("data: " + data);
+                FlashMessages.sendSuccess("Ticket successfully created.");
+                Meteor.call("insertTicket", Session.get('currentTargetContent'), data);
                 return data;
             }, function (error, result) {
-                // TODO: Add error alert
-                console.log("error: " + error);
+                var errArray = [];
+                _.each(error.errors, function (err) {
+                    errArray.push(err.title);
+                });
+                FlashMessages.sendError("Error creating ticket: " + errArray.to_sentence());
                 return error;
             });
             Session.set('activeModal', null);
         } else {
-            // TODO: Add form errors?
-            console.log("summary is too short");
+            // TODO: Add more form errors?
+            FlashMessages.sendError("Form error: Summary required");
         }
     }
 });

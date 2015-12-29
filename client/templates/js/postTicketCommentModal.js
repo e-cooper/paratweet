@@ -34,18 +34,21 @@ Template.postTicketCommentModal.events({
                 body: $('input#ticketCommentBody').val(),
                 public: $('input#ticketCommentPublic').prop('checked')
             }).then(function (data) {
-                // TODO: Add success alert
-                console.log("data: " + data);
+                FlashMessages.sendSuccess("Ticket comment successfully created.");
+                Meteor.call("insertTicketComment", ticketSelected, Session.get('currentTargetContent'), data);
                 return data;
             }, function (error, result) {
-                // TODO: Add error alert
-                console.log("error: " + error);
+                var errArray = [];
+                _.each(error.errors, function (err) {
+                    errArray.push(err.title);
+                });
+                FlashMessages.sendError("Error creating ticket: " + errArray.to_sentence());
                 return error;
             });
             Session.set('activeModal', null);
         } else {
-            // TODO: Add form errors?
-            console.log("body is too short");
+            // TODO: Add more form errors?
+            FlashMessages.sendError("Form error: Body required");
         }
     }
 });

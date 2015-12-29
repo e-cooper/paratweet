@@ -1,7 +1,8 @@
 <template name="appBody">
   {{> loginButtons}}
-  {{> viewLink}}
   {{#if currentUser}}
+    {{> viewLink}}
+    {{> flashMessages}}
     {{> modal}}
     {{> yield}}
   {{/if}}

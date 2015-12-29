@@ -12,6 +12,14 @@ Meteor.publish("messages", function () {
     return Messages.find({owner: this.userId});
 });
 
+Meteor.publish("tickets", function () {
+    return Tickets.find({owner: this.userId});
+});
+
+Meteor.publish("ticket_comments", function () {
+    return TicketComments.find({owner: this.userId});
+});
+
 Accounts.onLogin(function () {
     Meteor.call("setPending", "Tweets");
     Meteor.call("setPending", "Messages");

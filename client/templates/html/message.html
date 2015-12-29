@@ -1,0 +1,9 @@
+<template name="message">
+  <h4>{{content.created_at}}</h4>
+  <ul>
+    <li><strong>Text: </strong>{{content.text}}</li>
+    <li><strong>User: </strong>{{content.sender_screen_name}}</li>
+    <li><button type="button" class="btn btn-default openModal postMessageReply" data-modal-template="postReplyMessageModal">Reply</button></li>
+    <li><button type="button" class="btn btn-default openModal ticketAction" data-modal-template="ticketActionModal">Ticket Action</button></li>
+  </ul>
+</template>

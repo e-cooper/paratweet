@@ -42,17 +42,6 @@ Meteor.methods({
             console.log("message_sent_response: " + response);
         });
     },
-    postTicket: function () {
-        if (!Meteor.userId()) {
-            throw new Meteor.Error("not-authorized");
-        }
-
-        card.services('helpdesk').request('ticket:create', {
-            summary: "This is a test ticket",
-            description: "No description needed",
-            priority: "low"
-        });
-    },
     getTweets: function (user) {
         var T, lastFetch, lastTweet, sinceId, timestamp;
 
@@ -166,5 +155,32 @@ Meteor.methods({
                 Messages.update(message._id, {$set: {pending: false}});
             });
         }
+    },
+    insertTicket: function (objData, respData) {
+        if (!Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        Tickets.insert({
+            owner: Meteor.userId(),
+            parent: objData,
+            content: respData
+        });
+    },
+    insertTicketComment: function (ticketId, objData, respData) {
+        if (!Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        console.log("ticketId: " + ticketId);
+        console.log("objData: "); console.log(objData);
+        console.log("respData: "); console.log(respData);
+
+        TicketComments.insert({
+            ticketId: ticketId,
+            owner: Meteor.userId(),
+            parent: objData,
+            content: respData
+        });
     }
 });

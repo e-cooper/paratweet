@@ -21,7 +21,6 @@ meteorhacks:npm
 
 service-configuration
 accounts-twitter
-accounts-ui
 3stack:presence
 alethes:pages
 iron:router
@@ -30,5 +29,7 @@ iron:router
 npm-container
 reactive-var
 cosmos:browserify
-deanius:promise
 ejson
+twbs:bootstrap
+mrt:flash-messages
+ian:accounts-ui-bootstrap-3

@@ -1,0 +1,20 @@
+<template name="tweet">
+  <h4>{{content.created_at}}</h4>
+  <ul>
+    <li><strong>Text: </strong>{{content.text}}</li>
+    <li><strong>Source: </strong>{{content.source}}</li>
+    <li><strong>User: </strong>{{content.user.name}}</li>
+    <li><button type="button" class="btn btn-default openModal postReply" data-modal-template="postReplyModal">Reply</button></li>
+    <li><button type="button" class="btn btn-default openModal ticketAction" data-modal-template="ticketActionModal">Ticket Action</button></li>
+    {{#if existingTickets}}
+      {{#each existingTickets}}
+        <li>Ticket #{{this.content.id}} opened</li>
+      {{/each}}
+    {{/if}}
+    {{#if existingComments}}
+      {{#each existingComments}}
+        <li>Comment on Ticket #{{this.ticketId}}</li>
+      {{/each}}
+    {{/if}}
+  </ul>
+</template>
