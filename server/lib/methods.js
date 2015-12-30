@@ -1,5 +1,5 @@
 Meteor.methods({
-    postTweet: function (text, replyIdStr) {
+    postReply: function (text, replyIdStr) {
         if (!Meteor.userId()) {
             throw new Meteor.Error("not-authorized");
         }
@@ -11,14 +11,17 @@ Meteor.methods({
             access_token_secret:  Meteor.user().services.twitter.accessTokenSecret
         });
 
-        T.post('statuses/update', {
-            status: text,
-            in_reply_to_status_id: replyIdStr
-        }, function (err, data, response) {
-            console.log(err);
-            console.log(data);
-            console.log(response);
-        });
+        var postStatus = Meteor.wrapAsync(T.post, T);
+
+        try {
+            var postResult = postStatus('statuses/update', {
+                status: text,
+                in_reply_to_status_id: replyIdStr
+            });
+            return postResult;
+        } catch (error) {
+            throw new Meteor.Error("twitter-error", error.statusCode + " " + error.message);
+        }
     },
     postMessage: function (text, replyScreenName, replyIdStr) {
         if (!Meteor.userId()) {
@@ -32,15 +35,18 @@ Meteor.methods({
             access_token_secret:  Meteor.user().services.twitter.accessTokenSecret
         });
 
-        T.post('direct_messages/new', {
-            text: text,
-            screen_name: replyScreenName,
-            user_id: replyIdStr
-        }, function (err, data, response) {
-            console.log("message_sent_error: " + err);
-            console.log("message_sent_data: " + data);
-            console.log("message_sent_response: " + response);
-        });
+        var postDirectMessage = Meteor.wrapAsync(T.post, T);
+
+        try {
+            var postResult = postDirectMessage('direct_messages/new', {
+                text: text,
+                screen_name: replyScreenName,
+                user_id: replyIdStr
+            });
+            return postResult;
+        } catch (error) {
+            throw new Meteor.Error("twitter-error", error.statusCode + " " + error.message);
+        }
     },
     getTweets: function (user) {
         var T, lastFetch, lastTweet, sinceId, timestamp;

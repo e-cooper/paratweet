@@ -1,0 +1,19 @@
+.pg-loading-screen .pg-loading-html {
+  margin-top: 50px;
+}
+
+.pg-loading-screen .pg-loading-center-middle {
+  vertical-align: top;
+  padding-top: 100px;
+}
+
+.loading-message {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 300;
+  font-family: sans-serif;
+}
+
+.sk-spinner-wave div {
+  background-color: #fff;
+}

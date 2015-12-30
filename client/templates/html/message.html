@@ -1,9 +1,27 @@
 <template name="message">
-  <h4>{{content.created_at}}</h4>
-  <ul>
-    <li><strong>Text: </strong>{{content.text}}</li>
-    <li><strong>User: </strong>{{content.sender_screen_name}}</li>
-    <li><button type="button" class="btn btn-default openModal postMessageReply" data-modal-template="postReplyMessageModal">Reply</button></li>
-    <li><button type="button" class="btn btn-default openModal ticketAction" data-modal-template="ticketActionModal">Ticket Action</button></li>
-  </ul>
+  <div class="pt-tweet">
+    <img src={{content.sender.profile_image_url}} class="img-responsive" alt="Profile image">
+    <span>{{content.sender.name}} (@{{content.sender.screen_name}})</span>
+    <span>{{getProperDate}}</span>
+    <p class="pt-tweet_text">
+      {{content.text}}
+    </p>
+    <button type="button" class="btn btn-default openModal" data-modal-template="postReplyMessageModal">Message</button>
+    <button type="button" class="btn btn-default openModal" data-modal-template="postTicketModal">New Ticket</button>
+    <button type="button" class="btn btn-default openModal" data-modal-template="postTicketCommentModal">New Ticket Comment</button>
+    {{#if existingTickets}}
+      <ul>
+        {{#each existingTickets}}
+          <li>Ticket #{{this.content.id}} opened</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+    {{#if existingComments}}
+      <ul>
+        {{#each existingComments}}
+          <li>Comment on Ticket #{{this.ticketId}}</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
 </template>

@@ -1,6 +1,6 @@
 Template.postTicketCommentModal.onRendered(function () {
     if (Session.get('currentTargetContent')) {
-        var body = $('input#ticketCommentBody');
+        var body = $('textarea#ticket-comment-body');
         var senderScreenName =
             (Session.get('currentTargetContent').user)
             ? Session.get('currentTargetContent').user.screen_name
@@ -23,16 +23,13 @@ Template.postTicketCommentModal.helpers({
 });
 
 Template.postTicketCommentModal.events({
-    "click button.closeModal": function () {
-        Session.set('activeModal', null);
-    },
     "click .postTicketComment": function () {
-        var bodyContent = $('input#ticketCommentBody').val().length;
+        var bodyContent = $('textarea#ticket-comment-body').val().length;
         var ticketSelected = Number($('#ticket-select').val());
         if (bodyContent) {
             card.services('helpdesk').request('comment:create', ticketSelected, {
-                body: $('input#ticketCommentBody').val(),
-                public: $('input#ticketCommentPublic').prop('checked')
+                body: $('textarea#ticket-comment-body').val(),
+                public: $('input#ticket-comment-public').prop('checked')
             }).then(function (data) {
                 FlashMessages.sendSuccess("Ticket comment successfully created.");
                 Meteor.call("insertTicketComment", ticketSelected, Session.get('currentTargetContent'), data);
@@ -45,9 +42,10 @@ Template.postTicketCommentModal.events({
                 FlashMessages.sendError("Error creating ticket: " + errArray.to_sentence());
                 return error;
             });
-            Session.set('activeModal', null);
+            Modal.hide();
         } else {
             // TODO: Add more form errors?
+            Modal.hide();
             FlashMessages.sendError("Form error: Body required");
         }
     }

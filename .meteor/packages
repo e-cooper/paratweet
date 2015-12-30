@@ -33,3 +33,5 @@ ejson
 twbs:bootstrap
 mrt:flash-messages
 ian:accounts-ui-bootstrap-3
+peppelg:bootstrap-3-modal
+pcel:loading

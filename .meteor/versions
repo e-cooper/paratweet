@@ -70,6 +70,8 @@ oauth@1.1.6
 oauth1@1.1.5
 observe-sequence@1.0.7
 ordered-dict@1.0.4
+pcel:loading@1.0.3
+peppelg:bootstrap-3-modal@1.0.4
 promise@0.5.1
 random@1.0.5
 rate-limit@1.0.0

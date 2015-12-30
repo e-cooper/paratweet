@@ -1,0 +1,9 @@
+/* TODO: UNCOMMENT THIS WHEN READY;
+body > .inner {
+  display: none;
+}
+ */
+
+body.pg-loaded > .inner {
+  display: block;
+}

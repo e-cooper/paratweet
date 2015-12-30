@@ -1,6 +1,6 @@
 Template.postTicketModal.onRendered(function () {
     if (Session.get('currentTargetContent')) {
-        var description = $('input#ticketDescription');
+        var description = $('textarea#ticket-description');
         var senderScreenName =
             (Session.get('currentTargetContent').user)
             ? Session.get('currentTargetContent').user.screen_name
@@ -30,16 +30,13 @@ Template.postTicketModal.events({
         var user = $(event.target).val();
         console.log("user selected: " + user);
     },
-    "click button.closeModal": function () {
-        Session.set('activeModal', null);
-    },
     "click .postTicket": function () {
-        if ($('input#ticketSummary').val().length) {
+        if ($('input#ticket-summary').val().length) {
             card.services('helpdesk').request('ticket:create', {
-                summary: $('input#ticketSummary').val(),
-                description: $('input#ticketDescription').val(),
-                assignee: $('#assignee-select').val(),
-                priority: $('#priority-select').val()
+                summary: $('input#ticket-summary').val(),
+                description: $('textarea#ticket-description').val(),
+                assignee: $('#ticket-assignee-select').val(),
+                priority: $('#ticket-priority-select').val()
             }).then(function (data) {
                 FlashMessages.sendSuccess("Ticket successfully created.");
                 Meteor.call("insertTicket", Session.get('currentTargetContent'), data);
@@ -52,9 +49,10 @@ Template.postTicketModal.events({
                 FlashMessages.sendError("Error creating ticket: " + errArray.to_sentence());
                 return error;
             });
-            Session.set('activeModal', null);
+            Modal.hide();
         } else {
             // TODO: Add more form errors?
+            Modal.hide();
             FlashMessages.sendError("Form error: Summary required");
         }
     }
