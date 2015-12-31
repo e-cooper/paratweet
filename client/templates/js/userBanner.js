@@ -1,8 +1,8 @@
 Template.userBanner.helpers({
     bannerImage: function () {
-        var bannerImage = Meteor.user().services.twitter.banner_image.sizes["1500x500"].url;
+        var bannerImage = Meteor.user().services.twitter.banner_image;
         if (bannerImage) {
-            return bannerImage;
+            return bannerImage.sizes["1500x500"].url;
         } else {
             return "/images/default-banner.jpg";
         }
