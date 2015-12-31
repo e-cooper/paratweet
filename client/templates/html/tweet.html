@@ -1,14 +1,31 @@
 <template name="tweet">
-  <div class="pt-tweet">
-    <img src={{content.user.profile_image_url}} class="img-responsive" alt="Profile image">
-    <span>{{content.user.name}} (@{{content.user.screen_name}})</span>
-    <span>{{getProperDate}}</span>
-    <p class="pt-tweet_text">
-      {{content.text}}
-    </p>
-    <button type="button" class="btn btn-default openModal" data-modal-template="postReplyModal">Reply</button>
-    <button type="button" class="btn btn-default openModal" data-modal-template="postTicketModal">New Ticket</button>
-    <button type="button" class="btn btn-default openModal" data-modal-template="postTicketCommentModal">New Ticket Comment</button>
+  <div class="row pt-tweet">
+    <div class="col-sm-1 pt-profile-img">
+      <img src={{content.user.profile_image_url}} class="img-responsive" alt="Profile image">
+    </div>
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-xs-6">
+          <span>{{content.user.name}} (@{{content.user.screen_name}})</span>
+        </div>
+        <div class="col-xs-6">
+          <span>{{getProperDate}}</span>
+        </div>
+      </div>
+      <p class="pt-tweet_text">
+        {{content.text}}
+      </p>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-default btn-block btn-sm new-ticket-btn openModal" data-modal-template="postTicketModal">New Ticket</button>
+      <button type="button" class="btn btn-default btn-block btn-sm reply-btn openModal" data-modal-template="postReplyModal">
+        <span class="glyphicon glyphicon-send"></span>&nbsp;Reply
+      </button>
+      <!--
+      <button type="button" class="btn btn-default btn-block new-ticket-comment-btn openModal" data-modal-template="postTicketCommentModal">New Ticket Comment</button>
+      -->
+    </div>
+    <!--
     {{#if existingTickets}}
       <ul>
         {{#each existingTickets}}
@@ -23,5 +40,6 @@
         {{/each}}
       </ul>
     {{/if}}
+    -->
   </div>
 </template>

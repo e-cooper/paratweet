@@ -1,0 +1,24 @@
+.pt-row-no-padding > [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pt-screen-name-container.pt-col-abs {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: absolute;
+  transform: translateY(50px);
+}
+
+.pt-screen-name-container.pt-col-abs .pt-screen-name-box {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  display: inline-block;
+  padding: 20px;
+  width: auto;
+}
+
+.pt-screen-name-container.pt-col-abs h2 {
+  display: inline;
+  margin: 0;
+}

@@ -48,6 +48,52 @@ Meteor.methods({
             throw new Meteor.Error("twitter-error", error.statusCode + " " + error.message);
         }
     },
+    getBannerImage: function (user) {
+        var T, getBannerCall, getBannerResult, lastFetch;
+
+        T = new Twit({
+            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
+            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            access_token:         user.services.twitter.accessToken,
+            access_token_secret:  user.services.twitter.accessTokenSecret
+        });
+
+        lastFetch = Fetches.findOne({owner: user._id, type: 'BannerImage'}, {sort: {createdAt: -1}});
+
+        // Try to mitigate people hitting the rate limit by denying them
+        // updates if the last fetch was recent (less than a minute ago)
+        if (lastFetch) {
+            if (Math.ceil(Math.abs(lastFetch.createdAt - new Date()) / 1000) < 60) {
+                return;
+            }
+        }
+
+        getBannerCall = Meteor.wrapAsync(T.get, T);
+
+        try {
+            getBannerResult = getBannerCall('users/profile_banner', {
+                screen_name: user.services.twitter.screenName,
+                user_id: user.services.twitter.id
+            });
+
+            Meteor.users.update(user._id, {$set:
+                {"services.twitter.banner_image": getBannerResult}
+            });
+
+            Fetches.insert({
+                type: 'BannerImage',
+                createdAt: new Date(),
+                owner: user._id
+            });
+
+            return getBannerResult;
+        } catch (error) {
+            Meteor.users.update(user._id, {$set:
+                {"services.twitter.banner_image": null}
+            });
+            return null;
+        }
+    },
     getTweets: function (user) {
         var T, lastFetch, lastTweet, sinceId, timestamp;
 

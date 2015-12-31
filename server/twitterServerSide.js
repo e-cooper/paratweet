@@ -20,6 +20,18 @@ Meteor.publish("ticket_comments", function () {
     return TicketComments.find({owner: this.userId});
 });
 
+Meteor.publish("user_data", function () {
+    if (this.userId) {
+        Meteor.call("getBannerImage", Meteor.users.findOne(this.userId));
+    }
+    return Meteor.users.find({_id: this.userId}, {
+        fields: {
+            "services.twitter.banner_image": 1,
+            "services.twitter.screenName": 1
+        }
+    });
+});
+
 Accounts.onLogin(function () {
     Meteor.call("setPending", "Tweets");
     Meteor.call("setPending", "Messages");
@@ -48,6 +60,9 @@ function myTask () {
         // TODO: remove later
         console.log("auto getting messages");
         Meteor.call("getMessages", user);
+        // TODO: remove later
+        console.log("auto getting banner image");
+        Meteor.call("getBannerImage", user);
     }
     Meteor.setTimeout(myTask, interval);
 }

@@ -7,3 +7,35 @@ body > .inner {
 body.pg-loaded > .inner {
   display: block;
 }
+
+.pt-navbar {
+  background-color: rgb(3, 123, 158);
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.pt-navbar .navbar-brand {
+  color: #fff;
+}
+
+.pt-navbar .navbar-brand:hover, .pt-navbar .navbar-brand:focus {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.pt-navbar .navbar-nav > li > a {
+  color: #fff;
+}
+
+.pt-navbar .navbar-nav > li > a:hover, .pt-navbar .navbar-nav > li > a:focus {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.pt-navbar .navbar-nav > .open > a {
+  background-color: #fff;
+}
+
+.pt-navbar .navbar-nav > .open > a:hover, .pt-navbar .navbar-nav > .open > a:focus {
+  background-color: rgba(255, 255, 255, 0.9);
+}

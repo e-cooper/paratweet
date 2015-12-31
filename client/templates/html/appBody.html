@@ -1,6 +1,6 @@
 <template name="appBody">
   <div class="inner">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default pt-navbar">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#paratweet-navbar-collapse" aria-expanded="false">
@@ -22,9 +22,11 @@
       </div>
     </nav>
     {{#if currentUser}}
+      {{> userBanner}}
       {{> flashMessages}}
-      {{> modal}}
-      {{> yield}}
+      <div class="container pt-tweet-timeline">
+        {{> yield}}
+      </div>
     {{/if}}
   </div>
 </template>

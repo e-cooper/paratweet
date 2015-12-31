@@ -1,0 +1,13 @@
+.container.pt-tweet-timeline {
+  background-color: #fff;
+  border-radius: 3px;
+  -moz-box-shadow:    0 0 6px -1px #ccc;
+  -webkit-box-shadow: 0 0 6px -1px #ccc;
+  box-shadow:         0 0 6px -1px #ccc;
+  transform: translateY(-55px);
+}
+
+button.pending {
+  position: relative;
+  transform: translateY(50%);
+}

@@ -1,0 +1,32 @@
+.pt-tweet:nth-child(2n+1) {
+  background-color: rgb(250, 250, 250);
+}
+
+.pt-tweet {
+  padding: 20px 0;
+}
+
+.reply-btn {
+  border-color: rgb(202, 35, 129);
+  color: rgb(202, 35, 129);
+}
+
+.reply-btn:hover {
+  background-color: rgba(202, 35, 129, 0.1);
+  border-color: rgb(202, 35, 129);
+  color: rgb(202, 35, 129);
+}
+
+.btn span.glyphicon {
+  vertical-align: -1px;
+}
+
+.new-ticket-btn {
+  background-color: rgb(147, 208, 55);
+  border: none;
+  color: #fff;
+}
+
+.pt-profile-img {
+  padding-right: 0 !important;
+}

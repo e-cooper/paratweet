@@ -1,5 +1,6 @@
 Meteor.subscribe('tickets');
 Meteor.subscribe('ticket_comments');
+Meteor.subscribe('user_data');
 
 Meteor.startup(function () {
     var users, proUsersPromise;
