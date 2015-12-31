@@ -1,29 +1,43 @@
 <template name="tweet">
   <div class="row pt-tweet">
-    <div class="col-sm-1 pt-profile-img">
-      <img src={{content.user.profile_image_url}} class="img-responsive" alt="Profile image">
+    <div class="col-sm-2 pt-profile-img">
+      <img src={{biggerProfileImageUrl}} class="img-responsive center-block" alt="Profile image">
     </div>
     <div class="col-sm-8">
       <div class="row">
         <div class="col-xs-6">
-          <span>{{content.user.name}} (@{{content.user.screen_name}})</span>
+          <p>{{content.user.name}} (@{{content.user.screen_name}})</p>
         </div>
         <div class="col-xs-6">
-          <span>{{getProperDate}}</span>
+          <p class="text-right">{{moFormat createdAt 'MMM Do YYYY, h:mm:ss a'}}</p>
         </div>
       </div>
       <p class="pt-tweet_text">
         {{content.text}}
       </p>
     </div>
-    <div class="col-sm-3">
-      <button type="button" class="btn btn-default btn-block btn-sm new-ticket-btn openModal" data-modal-template="postTicketModal">New Ticket</button>
+    <div class="col-sm-2">
       <button type="button" class="btn btn-default btn-block btn-sm reply-btn openModal" data-modal-template="postReplyModal">
         <span class="glyphicon glyphicon-send"></span>&nbsp;Reply
       </button>
-      <!--
-      <button type="button" class="btn btn-default btn-block new-ticket-comment-btn openModal" data-modal-template="postTicketCommentModal">New Ticket Comment</button>
-      -->
+      <div class="dropdown">
+        <button class="btn btn-default btn-block btn-sm dropdown-toggle new-ticket-btn pt-actions-dropdown" type="button" id="actionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Paratweet
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="actionsDropdown">
+          <li>
+            <a href="#" class="openModal" data-modal-template="postTicketModal">
+              New Ticket
+            </a>
+          </li>
+          <li>
+            <a href="#" class="openModal" data-modal-template="postTicketCommentModal">
+              New Ticket Comment
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <!--
     {{#if existingTickets}}

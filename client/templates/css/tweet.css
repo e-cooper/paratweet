@@ -22,11 +22,8 @@
 }
 
 .new-ticket-btn {
+  margin-top: 5px;
   background-color: rgb(147, 208, 55);
   border: none;
   color: #fff;
-}
-
-.pt-profile-img {
-  padding-right: 0 !important;
 }

@@ -23,8 +23,8 @@
     </nav>
     {{#if currentUser}}
       {{> userBanner}}
-      {{> flashMessages}}
       <div class="container pt-tweet-timeline">
+        {{> flashMessages}}
         {{> yield}}
       </div>
     {{/if}}
