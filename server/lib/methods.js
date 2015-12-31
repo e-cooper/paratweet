@@ -95,7 +95,7 @@ Meteor.methods({
         }
     },
     getTweets: function (user) {
-        var T, lastFetch, lastTweet, sinceId, timestamp;
+        var T, lastFetch, lastTweet, sinceId, timestamp, getTweetsCall, getTweetsResult;
 
         T = new Twit({
             consumer_key:         Meteor.settings.twitter_consumer_key, // API key
@@ -119,35 +119,41 @@ Meteor.methods({
             sinceId = lastTweet.content.id_str;
         }
 
-        T.get('statuses/mentions_timeline', {
-            screen_name: user.services.twitter.screenName,
-            count: 200,
-            since_id: sinceId
-        }, Meteor.bindEnvironment(function (err, data, response) {
+        getTweetsCall = Meteor.wrapAsync(T.get, T);
+
+        try {
+            getTweetsResult = getTweetsCall('statuses/mentions_timeline', {
+                screen_name: user.services.twitter.screenName,
+                count: 200,
+                since_id: sinceId
+            });
+
             timestamp = new Date();
 
-            if (!err && response.statusCode === 200 && data.length > 0) {
-                Fetches.insert({
-                    type: 'Tweets',
-                    amount: data.length,
-                    createdAt: timestamp,
-                    owner: user._id
-                });
+            Fetches.insert({
+                type: 'Tweets',
+                amount: getTweetsResult.length,
+                createdAt: timestamp,
+                owner: user._id
+            });
 
-                _.each(data, function (tweet) {
-                    Tweets.insert({
-                        createdAt: new Date(tweet.created_at),
-                        fetchedAt: timestamp,
-                        owner: user._id,
-                        pending: true,
-                        content: tweet
-                    });
+            _.each(getTweetsResult, function (tweet) {
+                Tweets.insert({
+                    createdAt: new Date(tweet.created_at),
+                    fetchedAt: timestamp,
+                    owner: user._id,
+                    pending: true,
+                    content: tweet
                 });
-            }
-        }));
+            });
+
+            return getTweetsResult;
+        } catch (error) {
+            throw new Meteor.Error("twitter-error", error.statusCode + " " + error.message);
+        }
     },
     getMessages: function (user) {
-        var T, lastFetch, lastMessage, sinceId, timestamp;
+        var T, lastFetch, lastMessage, sinceId, timestamp, getMessagesCall, getMessagesResult;
 
         T = new Twit({
             consumer_key:         Meteor.settings.twitter_consumer_key, // API key
@@ -171,31 +177,37 @@ Meteor.methods({
             sinceId = lastMessage.content.id_str;
         }
 
-        T.get('direct_messages', {
-            count: 200,
-            since_id: sinceId
-        }, Meteor.bindEnvironment(function (err, data, response) {
-            if (!err && response.statusCode === 200 && data.length > 0) {
-                timestamp = new Date();
+        getMessagesCall = Meteor.wrapAsync(T.get, T);
 
-                Fetches.insert({
-                    type: 'Messages',
-                    amount: data.length,
-                    createdAt: timestamp,
-                    owner: user._id
-                });
+        try {
+            getMessagesResult = getMessagesCall('direct_messages', {
+                count: 200,
+                since_id: sinceId
+            });
 
-                _.each(data, function (message) {
-                    Messages.insert({
-                        createdAt: new Date(message.created_at),
-                        fetchedAt: timestamp,
-                        owner: user._id,
-                        pending: true,
-                        content: message
-                    });
+            timestamp = new Date();
+
+            Fetches.insert({
+                type: 'Messages',
+                amount: getMessagesResult.length,
+                createdAt: timestamp,
+                owner: user._id
+            });
+
+            _.each(getMessagesResult, function (message) {
+                Messages.insert({
+                    createdAt: new Date(message.created_at),
+                    fetchedAt: timestamp,
+                    owner: user._id,
+                    pending: true,
+                    content: message
                 });
-            }
-        }));
+            });
+
+            return getMessagesResult;
+        } catch (error) {
+            throw new Meteor.Error("twitter-error", error.statusCode + " " + error.message);
+        }
     },
     setPending: function (type) {
         if (type === "Tweets") {
