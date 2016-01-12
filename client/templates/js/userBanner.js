@@ -9,5 +9,8 @@ Template.userBanner.helpers({
     },
     screenName: function () {
         return Meteor.user().services.twitter.screenName;
+    },
+    userName: function () {
+        return Meteor.user().profile.name;
     }
 });
