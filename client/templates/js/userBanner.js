@@ -1,7 +1,7 @@
 Template.userBanner.helpers({
     bannerImage: function () {
         var bannerImage;
-        if (Meteor.user()) {
+        if (Meteor.user() && Meteor.user().services) {
             bannerImage = Meteor.user().services.twitter.banner_image;
         }
         if (bannerImage) {
@@ -11,7 +11,9 @@ Template.userBanner.helpers({
         }
     },
     screenName: function () {
-        return Meteor.user().services.twitter.screenName;
+        if (Meteor.user() && Meteor.user().services) {
+            return Meteor.user().services.twitter.screenName;
+        }
     },
     userName: function () {
         return Meteor.user().profile.name;

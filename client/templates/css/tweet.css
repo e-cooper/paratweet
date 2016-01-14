@@ -6,6 +6,18 @@
   padding: 20px 0;
 }
 
+a.pt-tweet-buttons {
+  margin-right: 10px;
+}
+
+a.pt-tweet-buttons:hover, a.pt-tweet-buttons:focus {
+  text-decoration: none;
+}
+
+.pt-tweet-buttons img {
+  height: 15px;
+}
+
 .reply-btn {
   border-color: rgb(202, 35, 129);
   color: rgb(202, 35, 129);

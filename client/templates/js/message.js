@@ -1,3 +1,7 @@
+Template.message.onRendered(function () {
+    this.$('.tooltipped').tooltip();
+});
+
 Template.message.helpers({
     biggerProfileImageUrl: function () {
         return this.content.sender.profile_image_url.replace(/normal/i, "bigger");
@@ -11,8 +15,8 @@ Template.message.helpers({
 });
 
 Template.message.events({
-    "click button.openModal, click a.openModal": function (event, template) {
-        var name = template.$(event.target).data('modal-template');
+    "click a.openModal": function (event, template) {
+        var name = template.$(event.target).closest('a.openModal').data('modal-template');
         Session.set('currentTargetContent', this.content);
         Modal.show(name);
     }

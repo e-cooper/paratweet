@@ -7,10 +7,10 @@ Template.postTicketModal.onRendered(function () {
             : Session.get('currentTargetContent').sender_screen_name;
 
         description.val(
-            'Sent using Paratweet:\n\n'
-            + Session.get('currentTargetContent').text
+            Session.get('currentTargetContent').text
             + '\n- @'
             + senderScreenName
+            + '\n\nSent using Paratweet'
         );
     }
 });

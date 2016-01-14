@@ -17,27 +17,15 @@
       </p>
     </div>
     <div class="col-sm-2">
-      <button type="button" class="btn btn-default btn-block btn-sm reply-btn openModal" data-modal-template="postReplyMessageModal">
-        <span class="glyphicon glyphicon-send"></span>&nbsp;Message
-      </button>
-      <div class="dropdown">
-        <button class="btn btn-default btn-block btn-sm dropdown-toggle new-ticket-btn pt-actions-dropdown" type="button" id="actionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Paratweet
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="actionsDropdown">
-          <li>
-            <a href="#" class="openModal" data-modal-template="postTicketModal">
-              New Ticket
-            </a>
-          </li>
-          <li>
-            <a href="#" class="openModal" data-modal-template="postTicketCommentModal">
-              New Ticket Comment
-            </a>
-          </li>
-        </ul>
-      </div>
+      <a href="#" class="pt-tweet-buttons openModal tooltipped" data-modal-template="postTicketModal" data-toggle="tooltip" data-placement="top" title="New Ticket">
+        <img src="/images/create.svg" alt="Create Ticket">
+      </a>
+      <a href="#" class="pt-tweet-buttons openModal tooltipped" data-modal-template="postTicketCommentModal" data-toggle="tooltip" data-placement="top" title="Add Comment">
+        <img src="/images/add-to-existing.svg" alt="Add Comment to Existing Ticket">
+      </a>
+      <a href="#" class="pt-tweet-buttons openModal tooltipped" data-modal-template="postReplyMessageModal" data-toggle="tooltip" data-placement="top" title="Reply">
+        <img src="/images/reply.svg" alt="Reply">
+      </a>
     </div>
     <!--
     {{#if existingTickets}}
