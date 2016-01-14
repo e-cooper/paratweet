@@ -1,3 +1,14 @@
 <template name="login">
-  <div class="inner">{{> loginButtons}}</div>
+  <div class="inner">
+    <div class="pt-login-page">
+      <div class="pt-login-block pt-rounded-shadow-box">
+        <h2 class="pt-color-blue">Welcome to Paratweet!</h2>
+        <h4 class="pt-color-blue">
+          To get started, we'll need you to sign in with Twitter.
+        </h4>
+        {{> loginButtons}}
+        <button type="button" class="btn btn-link">Contact</button>
+      </div>
+    </div>
+  </div>
 </template>

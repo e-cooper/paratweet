@@ -1,0 +1,21 @@
+/**
+ * Put styles that will be used across many templates in here. Leave the other
+ * css files to more template-specific styling so they are easier to locate
+ */
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.pt-row-no-padding > [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pt-color-blue {
+  color: rgb(18, 123, 156);
+}
+
+button.btn-link, button.btn-link:hover, button.btn-link:focus {
+  color: #8AC13C;
+}

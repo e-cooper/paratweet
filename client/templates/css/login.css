@@ -1,0 +1,32 @@
+.pt-login-page {
+  background-color: rgb(230, 240, 243);
+  height: 100vh;
+}
+
+.pt-login-block {
+  background-color: #fff;
+  padding: 40px 50px 20px;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -20%);
+  text-align: center;
+  border-radius: 6px;
+  -moz-box-shadow:    0 0 8px -1px #999;
+  -webkit-box-shadow: 0 0 8px -1px #999;
+  box-shadow:         0 0 8px -1px #999;
+}
+
+.pt-login-block h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.pt-login-block h4 {
+  margin-bottom: 40px;
+}
+
+.pt-login-block button.btn-link {
+  font-size: 16px;
+  margin-top: 12px;
+}

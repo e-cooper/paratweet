@@ -236,10 +236,6 @@ Meteor.methods({
             throw new Meteor.Error("not-authorized");
         }
 
-        console.log("ticketId: " + ticketId);
-        console.log("objData: "); console.log(objData);
-        console.log("respData: "); console.log(respData);
-
         TicketComments.insert({
             ticketId: ticketId,
             owner: Meteor.userId(),

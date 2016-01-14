@@ -7,11 +7,10 @@ Template.postTicketCommentModal.onRendered(function () {
             : Session.get('currentTargetContent').sender_screen_name;
 
         body.val(
-            '"'
-            + Session.get('currentTargetContent').text
-            + '"'
-            + ' - @'
+            Session.get('currentTargetContent').text
+            + '\n- @'
             + senderScreenName
+            + '\n\nSent using Paratweet'
         );
     }
 });
