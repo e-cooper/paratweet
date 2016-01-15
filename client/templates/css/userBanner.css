@@ -1,12 +1,15 @@
-.pt-screen-name-container.pt-col-abs {
-  padding-top: 20px;
-  padding-bottom: 20px;
+.pt-banner {
+  position: relative;
+}
+
+.pt-row-abs {
   position: absolute;
-  transform: translateY(50px);
+  top: 0;
+  transform: translateY(50%);
 }
 
 .pt-screen-name-container.pt-col-abs .pt-screen-name-box {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(80, 69, 77, 0.7);
   border-radius: 3px;
   color: #fff;
   display: inline-block;

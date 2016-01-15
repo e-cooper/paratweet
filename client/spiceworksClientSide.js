@@ -33,6 +33,8 @@ Meteor.startup(function () {
             value: ++data.meta.current_page
         };
     });
+
+    Template._loginButtonsLoggedInDropdown = Template.my_loginButtonsLoggedInDropdown;
 });
 
 // Need to get all of the IT Pros so this is one way to make sure we go through

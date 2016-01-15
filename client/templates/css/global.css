@@ -3,13 +3,32 @@
  * css files to more template-specific styling so they are easier to locate
  */
 
+/**
+ * colors
+ * green: #8AC13C;
+ * blue: #127B9C;
+ */
+
 body {
   font-family: 'Raleway', sans-serif;
+}
+
+[class*="col-"].pt-col-no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .pt-row-no-padding > [class*="col-"] {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+.pt-color-green {
+  color: #8AC13C;
+}
+
+.pt-color-lt-gray {
+  color: #BAB2B9;
 }
 
 .pt-color-blue {

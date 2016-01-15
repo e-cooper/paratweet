@@ -38,7 +38,7 @@ Template.postTicketCommentModal.events({
                 _.each(error.errors, function (err) {
                     errArray.push(err.title);
                 });
-                FlashMessages.sendError("Error creating ticket: " + errArray.to_sentence());
+                FlashMessages.sendError("Error creating ticket: " + errArray.to_sentence(), { autoHide: false });
                 return error;
             });
             Modal.hide();

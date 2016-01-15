@@ -25,11 +25,14 @@ Template.postTicketModal.helpers({
 });
 
 Template.postTicketModal.events({
-    "change #assignee-select": function (event, template) {
-        var user = $(event.target).val();
-        console.log("user selected: " + user);
-    },
     "click .postTicket": function () {
+        var currentTweetId = Session.get("currentTargetContent").id_str;
+        if (Tickets.find({"parent.id_str": currentTweetId}).count() > 0) {
+            FlashMessages.sendError("Ticket already submitted for this item");
+            Modal.hide();
+            return;
+        }
+
         if ($('input#ticket-summary').val().length) {
             card.services('helpdesk').request('ticket:create', {
                 summary: $('input#ticket-summary').val(),
@@ -45,7 +48,7 @@ Template.postTicketModal.events({
                 _.each(error.errors, function (err) {
                     errArray.push(err.title);
                 });
-                FlashMessages.sendError("Error creating ticket: " + errArray.to_sentence());
+                FlashMessages.sendError("Error creating ticket: " + errArray.to_sentence(), { autoHide: false });
                 return error;
             });
             Modal.hide();

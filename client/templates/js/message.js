@@ -1,23 +1,68 @@
 Template.message.onRendered(function () {
-    this.$('.tooltipped').tooltip();
+    var mySVGsToInject = document.querySelectorAll('.svg');
+    var injectorOptions = {
+        evalScripts: false
+    }
+    SVGInjector(mySVGsToInject, injectorOptions, function () {
+        this.$('.tooltipped').tooltip();
+    });
 });
 
 Template.message.helpers({
     biggerProfileImageUrl: function () {
         return this.content.sender.profile_image_url.replace(/normal/i, "bigger");
     },
-    existingTickets: function () {
-        return Tickets.find({"parent.id_str": this.content.id_str});
+    disabledTicketButton: function () {
+        if (Tickets.find({"parent.id_str": this.content.id_str}).count() > 0) {
+            return "disabled";
+        }
     },
-    existingComments: function () {
+    existingTicket: function () {
+        return Tickets.findOne({"parent.id_str": this.content.id_str});
+    },
+    existingComment: function () {
         return TicketComments.find({"parent.id_str": this.content.id_str});
+    },
+    messageText: function () {
+        var plainText = this.content.text;
+        var endResult = plainText;
+        var urls = this.content.entities.urls;
+        var media = this.content.entities.media;
+
+        if (urls && urls.length) {
+            urls.forEach(function (element, index, array) {
+                endResult = endResult.slice(0, element.indices[0])
+                            + '<a href="'
+                            + element.url
+                            + '" title="'
+                            + element.expanded_url
+                            + '">'
+                            + element.display_url
+                            + '</a>'
+                            + endResult.slice(element.indices[1]);
+            });
+        }
+
+        if (media && media.length) {
+            media.forEach(function (element, index, array) {
+                endResult = endResult
+                            + '<br/>'
+                            + '<img class="pt-media" src="'
+                            + element.media_url
+                            + '">';
+            });
+        }
+
+        return endResult;
     }
 });
 
 Template.message.events({
     "click a.openModal": function (event, template) {
-        var name = template.$(event.target).closest('a.openModal').data('modal-template');
-        Session.set('currentTargetContent', this.content);
-        Modal.show(name);
+        if (!event.target.closest('a.disabled')) {
+            var name = template.$(event.target).closest('a.openModal').data('modal-template');
+            Session.set('currentTargetContent', this.content);
+            Modal.show(name);
+        }
     }
 });

@@ -15,7 +15,9 @@
             </div>
             <div class="collapse navbar-collapse" id="paratweet-navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
-                <li>{{> viewLink}}</li>
+                <li>
+                  <a href="#">Feedback</a>
+                </li>
                 {{> loginButtons}}
               </ul>
             </div>
@@ -24,7 +26,23 @@
       </div>
       {{> userBanner}}
       <div class="container pt-tweet-timeline">
-        {{> flashMessages}}
+        <div class="row">
+          <div class="col-sm-12">
+            {{> viewLink}}
+          </div>
+        </div>
+        {{#if pendingObject}}
+          <div class="row pt-row-no-padding">
+            <div class="col-sm-12">
+              <button class="btn btn-primary btn-block pt-load-new-btn">
+                Load New {{currentRoute}}
+              </button>
+            </div>
+          </div>
+        {{/if}}
+        <div class="row pt-row-no-padding">
+          {{> flashMessages}}
+        </div>
         {{> yield}}
       </div>
     {{/if}}

@@ -48,6 +48,35 @@ Meteor.methods({
             throw new Meteor.Error("twitter-error", error.statusCode + " " + error.message);
         }
     },
+    getRateLimits: function (user) {
+        var T, getRateCall, getRateResult;
+
+        T = new Twit({
+            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
+            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            access_token:         user.services.twitter.accessToken,
+            access_token_secret:  user.services.twitter.accessTokenSecret
+        });
+
+        getRateCall = Meteor.wrapAsync(T.get, T);
+
+        try {
+            getRateResult = getRateCall('application/rate_limit_status', {
+                resources: 'users,statuses,direct_messages'
+            });
+
+            Meteor.users.update(user._id, {
+                $set: {
+                    "services.twitter.rate_limits": getRateResult
+                }
+            });
+
+            return getRateResult;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    },
     getBannerImage: function (user) {
         var T, getBannerCall, getBannerResult, lastFetch;
 
@@ -80,14 +109,20 @@ Meteor.methods({
                 {"services.twitter.banner_image": getBannerResult}
             });
 
-            Fetches.insert({
+            Fetches.upsert({
                 type: 'BannerImage',
-                createdAt: new Date(),
-                owner: user._id
+                owner: user._id,
+            }, {
+                $set: {
+                    amount: getBannerResult.length,
+                    result: getBannerResult,
+                    fetchedAt: new Date()
+                }
             });
 
             return getBannerResult;
         } catch (error) {
+            console.log(error);
             Meteor.users.update(user._id, {$set:
                 {"services.twitter.banner_image": null}
             });
@@ -130,11 +165,15 @@ Meteor.methods({
 
             timestamp = new Date();
 
-            Fetches.insert({
+            Fetches.upsert({
                 type: 'Tweets',
-                amount: getTweetsResult.length,
-                createdAt: timestamp,
-                owner: user._id
+                owner: user._id,
+            }, {
+                $set: {
+                    amount: getTweetsResult.length,
+                    result: getTweetsResult,
+                    createdAt: timestamp
+                }
             });
 
             _.each(getTweetsResult, function (tweet) {
@@ -187,11 +226,15 @@ Meteor.methods({
 
             timestamp = new Date();
 
-            Fetches.insert({
+            Fetches.upsert({
                 type: 'Messages',
-                amount: getMessagesResult.length,
-                createdAt: timestamp,
-                owner: user._id
+                owner: user._id,
+            }, {
+                $set: {
+                    amount: getMessagesResult.length,
+                    result: getMessagesResult,
+                    createdAt: timestamp
+                }
             });
 
             _.each(getMessagesResult, function (message) {

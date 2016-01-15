@@ -4,10 +4,16 @@
   -moz-box-shadow:    0 0 6px -1px #ccc;
   -webkit-box-shadow: 0 0 6px -1px #ccc;
   box-shadow:         0 0 6px -1px #ccc;
-  transform: translateY(-55px);
+  transform: translateY(-50px);
 }
 
 button.pending {
   position: relative;
   transform: translateY(50%);
+}
+
+.pt-empty-collection {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }

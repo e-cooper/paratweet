@@ -1,11 +1,18 @@
 <template name="viewLink">
-  {{#if currentlyOnTweets}}
-    {{#linkTo route="messages"}}
-      Messages
-    {{/linkTo}}
-  {{else}}
-    {{#linkTo route="tweets"}}
+  {{#linkTo route="mentions" class="pt-viewLink"}}
+    <h4 class="pt-viewLink-text pt-color-blue {{checkActiveRoute 'mentions'}}">
       Mentions
-    {{/linkTo}}
-  {{/if}}
+      {{#if pendingDocument "Tweets"}}
+        <img src="/images/new-message-alert.svg" alt="New Mentions">
+      {{/if}}
+    </h4>
+  {{/linkTo}}
+  {{#linkTo route="messages" class="pt-viewLink"}}
+    <h4 class="pt-viewLink-text {{checkActiveRoute 'messages'}}">
+      Direct Messages
+      {{#if pendingDocument "Messages"}}
+        <img src="/images/new-message-alert.svg" alt="New Direct Messages">
+      {{/if}}
+    </h4>
+  {{/linkTo}}
 </template>

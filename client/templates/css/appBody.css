@@ -9,7 +9,7 @@ body.pg-loaded > .inner {
 }
 
 .pt-nav-container {
-  background-color: rgb(18, 123, 156);
+  background-color: #127B9C;
 }
 
 .pt-nav-container .container {
@@ -18,7 +18,7 @@ body.pg-loaded > .inner {
 }
 
 .pt-navbar {
-  background-color: rgb(18, 123, 156);
+  background-color: #127B9C;
   border: none;
   border-radius: 0;
   color: #fff;
@@ -47,4 +47,21 @@ body.pg-loaded > .inner {
 
 .pt-navbar .navbar-nav > .open > a:hover, .pt-navbar .navbar-nav > .open > a:focus {
   background-color: rgba(255, 255, 255, 0.9);
+}
+
+.pt-load-new-btn,
+.pt-load-new-btn:active,
+.pt-load-new-btn:focus,
+.pt-load-new-btn:hover,
+.pt-load-new-btn:active:hover,
+.pt-load-new-btn:active:focus {
+  border: none;
+  border-radius: 0;
+  background-color: #0C5971;
+}
+
+.alert {
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0;
 }

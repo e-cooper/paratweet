@@ -1,68 +1,65 @@
 .pt-tweet:nth-child(2n+1) {
-  background-color: rgb(250, 250, 250);
+  background-color: #FBFBFB;
 }
 
 .pt-tweet {
-  padding: 20px 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.pt-screen-name {
+  font-size: 18px;
+}
+
+.pt-screen-name span {
+  font-size: 14px;
+}
+
+.pt-screen-name span a:hover, .pt-screen-name span a:focus {
+  color: #8AC13C;
+}
+
+.pt-tweet-text {
+  word-wrap: break-word;
+}
+
+.pt-media {
+  margin-top: 15px;
+  max-width: 100%;
+  max-height: 300px;
+  width: auto;
+}
+
+.pt-tweet-buttons-container, .pt-ticket-message {
+  display: block;
 }
 
 a.pt-tweet-buttons {
-  margin-right: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 a.pt-tweet-buttons:hover, a.pt-tweet-buttons:focus {
   text-decoration: none;
 }
 
-.pt-tweet-buttons img {
+a.pt-tweet-buttons svg {
   height: 15px;
+  width: 15px;
+  margin: 0 auto;
 }
 
-.reply-btn {
-  border-color: rgb(202, 35, 129);
-  color: rgb(202, 35, 129);
+a.pt-tweet-buttons.disabled svg g {
+  fill: #BAB2B9;
 }
 
-.reply-btn:hover,
-.reply-btn:focus {
-  background-color: rgba(202, 35, 129, 0.1);
-  border-color: rgb(202, 35, 129);
-  color: rgb(202, 35, 129);
+.pt-ticket-message {
+  clear: both;
 }
 
-.open > .reply-btn:active,
-.reply-btn:active,
-.reply-btn:active:hover,
-.reply-btn:active:focus {
-  background-color: rgba(202, 35, 129, 0.2);
-  border-color: rgb(202, 35, 129);
-  color: rgb(202, 35, 129);
-}
-
-.btn span.glyphicon {
-  vertical-align: -1px;
-}
-
-.pt-actions-dropdown {
-  margin-top: 5px;
-  background-color: rgb(147, 208, 55);
-  border: none;
-  color: #fff;
-}
-
-.open > .dropdown-toggle.pt-actions-dropdown,
-.open > .dropdown-toggle.pt-actions-dropdown:hover,
-.open > .dropdown-toggle.pt-actions-dropdown:focus,
-.pt-actions-dropdown:hover,
-.pt-actions-dropdown:focus {
-  background-color: rgba(147, 208, 55, 0.8);
-  color: #fff;
-}
-
-.open > .dropdown-toggle.pt-actions-dropdown:active,
-.pt-actions-dropdown:active,
-.pt-actions-dropdown:active:hover,
-.pt-actions-dropdown:active:focus {
-  background-color: rgb(132, 187, 49);
-  color: #fff;
+span.pt-ticket-created {
+  display: block;
+  font-size: 11px;
+  padding-top: 5px;
+  text-align: right;
 }

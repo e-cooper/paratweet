@@ -1,11 +1,6 @@
 Template.twitterMessages.helpers({
-    rawData: function () {
-        var arr = new Array();
-        Messages.find({owner: Meteor.userId()}).forEach(function (message) {
-            arr.push(JSON.stringify(message, null, 2));
-        });
-
-        return arr;
+    messagesNotEmpty: function () {
+        return Messages.find({owner: Meteor.userId(), pending: {$ne: true}}).count();
     },
     pendingMessageCount: function () {
         return Messages.find({owner: Meteor.userId(), pending: {$ne: false}}).count();

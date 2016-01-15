@@ -1,47 +1,50 @@
 <template name="message">
   <div class="row pt-tweet">
-    <div class="col-sm-2 pt-profile-img">
+    <div class="col-sm-2 pt-profile-img pt-col-no-padding">
       <img src={{biggerProfileImageUrl}} class="img-responsive center-block" alt="Profile image">
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-8 pt-col-no-padding">
       <div class="row">
         <div class="col-xs-6">
-          <p>{{content.sender.name}} (@{{content.sender.screen_name}})</p>
+          <p class="pt-screen-name pt-color-blue">
+            {{content.sender.name}}
+            <span>
+              <a class="pt-color-green" href="https://twitter.com/{{content.sender.screen_name}}" target="_blank">
+                @{{content.sender.screen_name}}
+              </a>
+            </span>
+          </p>
         </div>
         <div class="col-xs-6">
-          <p class="text-right">{{moFormat createdAt 'MMM Do YYYY, h:mm:ss a'}}</p>
+          <p class="text-right pt-color-lt-gray">
+            {{moFormat createdAt 'h:mm a MMM Do'}}
+          </p>
         </div>
       </div>
-      <p class="pt-tweet_text">
-        {{content.text}}
+      <p class="pt-tweet-text">
+        {{{messageText}}}
       </p>
     </div>
     <div class="col-sm-2">
-      <a href="#" class="pt-tweet-buttons openModal tooltipped" data-modal-template="postTicketModal" data-toggle="tooltip" data-placement="top" title="New Ticket">
-        <img src="/images/create.svg" alt="Create Ticket">
-      </a>
-      <a href="#" class="pt-tweet-buttons openModal tooltipped" data-modal-template="postTicketCommentModal" data-toggle="tooltip" data-placement="top" title="Add Comment">
-        <img src="/images/add-to-existing.svg" alt="Add Comment to Existing Ticket">
-      </a>
-      <a href="#" class="pt-tweet-buttons openModal tooltipped" data-modal-template="postReplyMessageModal" data-toggle="tooltip" data-placement="top" title="Reply">
-        <img src="/images/reply.svg" alt="Reply">
-      </a>
+      <div class="pt-tweet-buttons-container pull-right">
+        <a href="#" class="pt-tweet-buttons openModal {{disabledTicketButton}}" data-modal-template="postTicketModal">
+          <img class="svg tooltipped" src="/images/create.svg" alt="Create Ticket" data-toggle="tooltip" data-placement="top" title="New Ticket">
+        </a>
+
+        <a href="#" class="pt-tweet-buttons openModal" data-modal-template="postTicketCommentModal">
+          <img class="svg tooltipped" src="/images/add-to-existing.svg" alt="Add Comment to Existing Ticket" data-toggle="tooltip" data-placement="top" title="Add Comment">
+        </a>
+
+        <a href="#" class="pt-tweet-buttons openModal" data-modal-template="postReplyMessageModal">
+          <img class="svg tooltipped" src="/images/reply.svg" alt="Reply" data-toggle="tooltip" data-placement="top" title="Reply">
+        </a>
+      </div>
+      {{#with existingTicket}}
+        <div class="pt-ticket-message">
+          <span class="pt-ticket-created pt-color-lt-gray">Ticket Created</span>
+          <span class="pt-ticket-created pt-color-lt-gray">{{moFormat content.created_at 'h:mm a MMM Do' }}</span>
+        </div>
+      {{/with}}
     </div>
-    <!--
-    {{#if existingTickets}}
-      <ul>
-        {{#each existingTickets}}
-          <li>Ticket #{{this.content.id}} opened</li>
-        {{/each}}
-      </ul>
-    {{/if}}
-    {{#if existingComments}}
-      <ul>
-        {{#each existingComments}}
-          <li>Comment on Ticket #{{this.ticketId}}</li>
-        {{/each}}
-      </ul>
-    {{/if}}
-    -->
   </div>
 </template>

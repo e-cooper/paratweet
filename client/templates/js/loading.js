@@ -1,4 +1,4 @@
-Template.loading.rendered = function () {
+Template.loading.onRendered(function () {
   if (!Session.get('loadingSplash')) {
     this.loading = window.pleaseWait({
       logo: '',
@@ -7,13 +7,13 @@ Template.loading.rendered = function () {
     });
     Session.set('loadingSplash', true);
   }
-};
+});
 
-Template.loading.destroyed = function () {
+Template.loading.onDestroyed(function () {
   if (this.loading) {
     this.loading.finish();
   }
-};
+});
 
 var spinner = '<div class="sk-spinner sk-spinner-wave">'
   + ' <div class="sk-rect1"></div>'
