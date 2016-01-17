@@ -21,7 +21,7 @@ Template.postReplyModal.events({
                 if (error) {
                     FlashMessages.sendError(error);
                 } else {
-                    FlashMessages.sendSuccess("Reply successfully sent.");
+                    FlashMessages.sendSuccess("Reply sent successfully.");
                 }
             });
             Modal.hide();

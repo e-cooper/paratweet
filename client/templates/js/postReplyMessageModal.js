@@ -9,7 +9,7 @@ Template.postReplyMessageModal.events({
                 if (error) {
                     FlashMessages.sendError(error);
                 } else {
-                    FlashMessages.sendSuccess("Message successfully sent.");
+                    FlashMessages.sendSuccess("Message sent successfully.");
                 }
             });
             Modal.hide();
