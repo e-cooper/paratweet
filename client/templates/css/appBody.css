@@ -59,9 +59,3 @@ body.pg-loaded > .inner {
   border-radius: 0;
   background-color: #0C5971;
 }
-
-.alert {
-  margin-bottom: 0;
-  border: none;
-  border-radius: 0;
-}

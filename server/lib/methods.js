@@ -5,8 +5,8 @@ Meteor.methods({
         }
 
         var T = new Twit({
-            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
-            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            consumer_key:         Meteor.settings.TWITTER_CONSUMER_KEY, // API key
+            consumer_secret:      Meteor.settings.TWITTER_CONSUMER_SECRET, // API secret
             access_token:         Meteor.user().services.twitter.accessToken,
             access_token_secret:  Meteor.user().services.twitter.accessTokenSecret
         });
@@ -29,8 +29,8 @@ Meteor.methods({
         }
 
         var T = new Twit({
-            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
-            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            consumer_key:         Meteor.settings.TWITTER_CONSUMER_KEY, // API key
+            consumer_secret:      Meteor.settings.TWITTER_CONSUMER_SECRET, // API secret
             access_token:         Meteor.user().services.twitter.accessToken,
             access_token_secret:  Meteor.user().services.twitter.accessTokenSecret
         });
@@ -52,8 +52,8 @@ Meteor.methods({
         var T, getRateCall, getRateResult;
 
         T = new Twit({
-            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
-            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            consumer_key:         Meteor.settings.TWITTER_CONSUMER_KEY, // API key
+            consumer_secret:      Meteor.settings.TWITTER_CONSUMER_SECRET, // API secret
             access_token:         user.services.twitter.accessToken,
             access_token_secret:  user.services.twitter.accessTokenSecret
         });
@@ -81,8 +81,8 @@ Meteor.methods({
         var T, getBannerCall, getBannerResult, lastFetch;
 
         T = new Twit({
-            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
-            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            consumer_key:         Meteor.settings.TWITTER_CONSUMER_KEY, // API key
+            consumer_secret:      Meteor.settings.TWITTER_CONSUMER_SECRET, // API secret
             access_token:         user.services.twitter.accessToken,
             access_token_secret:  user.services.twitter.accessTokenSecret
         });
@@ -133,8 +133,8 @@ Meteor.methods({
         var T, lastFetch, lastTweet, sinceId, timestamp, getTweetsCall, getTweetsResult;
 
         T = new Twit({
-            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
-            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            consumer_key:         Meteor.settings.TWITTER_CONSUMER_KEY, // API key
+            consumer_secret:      Meteor.settings.TWITTER_CONSUMER_SECRET, // API secret
             access_token:         user.services.twitter.accessToken,
             access_token_secret:  user.services.twitter.accessTokenSecret
         });
@@ -195,8 +195,8 @@ Meteor.methods({
         var T, lastFetch, lastMessage, sinceId, timestamp, getMessagesCall, getMessagesResult;
 
         T = new Twit({
-            consumer_key:         Meteor.settings.twitter_consumer_key, // API key
-            consumer_secret:      Meteor.settings.twitter_consumer_secret, // API secret
+            consumer_key:         Meteor.settings.TWITTER_CONSUMER_KEY, // API key
+            consumer_secret:      Meteor.settings.TWITTER_CONSUMER_SECRET, // API secret
             access_token:         user.services.twitter.accessToken,
             access_token_secret:  user.services.twitter.accessTokenSecret
         });
@@ -284,6 +284,36 @@ Meteor.methods({
             owner: Meteor.userId(),
             parent: objData,
             content: respData
+        });
+    },
+    sendEmail: function (user, feedbackObj, feedback) {
+        if (feedback && !Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        this.unblock();
+
+        var subject = feedback ? "feedback" : "contact";
+        var userObj = user ? JSON.stringify(user) : "no user";
+        var text = "<h4>"
+                    + feedbackObj.type
+                    + "</h4>"
+                    + "<p>"
+                    + feedbackObj.description
+                    + "</p>"
+                    + "<br/>"
+                    + "<ul>"
+                    + "<li>Name: " + feedbackObj.name + "</li>"
+                    + "<li>Email: " + feedbackObj.email + "</li>"
+                    + "<li>Agree to be contacted: <b>" + feedbackObj.agree + "</b></li>"
+                    + "<li>User object: " + userObj + "</li>"
+                    + "</ul>";
+
+        Email.send({
+          to: 'paratweetapp@gmail.com',
+          from: 'paratweetapp@gmail.com',
+          subject: 'New message from ' + subject + ' form',
+          html: text
         });
     }
 });

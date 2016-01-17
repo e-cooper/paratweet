@@ -13,6 +13,10 @@ Template.appBody.helpers({
 });
 
 Template.appBody.events({
+    "click a.openModal": function (event, template) {
+        var name = template.$(event.target).closest('a.openModal').data('modal-template');
+        Modal.show(name);
+    },
     "click .pt-load-new-btn": function () {
         if (Router.current().route.getName() === "mentions") {
             Meteor.call("setPending", "Tweets");

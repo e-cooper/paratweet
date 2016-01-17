@@ -3,6 +3,6 @@ ServiceConfiguration.configurations.remove({
 });
 ServiceConfiguration.configurations.insert({
     service: 'twitter',
-    consumerKey: Meteor.settings.twitter_consumer_key,
-    secret: Meteor.settings.twitter_consumer_secret
+    consumerKey: Meteor.settings.TWITTER_CONSUMER_KEY,
+    secret: Meteor.settings.TWITTER_CONSUMER_SECRET
 });

@@ -33,6 +33,7 @@ Meteor.publish("user_data", function () {
 });
 
 Meteor.startup(function () {
+    process.env.MAIL_URL = Meteor.settings.MAIL_URL;
     Meteor.setTimeout(requestTwitterData, interval);
 });
 

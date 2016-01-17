@@ -1,0 +1,66 @@
+<template name="postFeedbackModal">
+  <div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">
+            Feedback for Paratweet
+          </h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="feedback-select" class="control-label">
+                Feedback Type
+              </label>
+              <select class="form-control" id="feedback-select">
+                {{#each feedbackReason}}
+                  <option value="{{this.id}}">
+                    {{this.text}}
+                  </option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="feedback-description" class="control-label">
+                Description
+              </label>
+              <textarea class="form-control" id="feedback-description" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="feedback-name" class="control-label">
+                Name (optional)
+              </label>
+              <input type="text" class="form-control" id="feedback-name">
+            </div>
+            <div class="form-group">
+              <label for="feedback-email" class="control-label">
+                Email (optional)
+              </label>
+              <input type="text" class="form-control" id="feedback-email">
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="feedback-agree">
+                  Agree to be contacted through Twitter or Email
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary postFeedback">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -39,6 +39,12 @@ button.btn-link, button.btn-link:hover, button.btn-link:focus {
   color: #8AC13C;
 }
 
+.pt-alerts .alert {
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0;
+}
+
 /**
  * modal styles, overriding bootstrap styles
  */
