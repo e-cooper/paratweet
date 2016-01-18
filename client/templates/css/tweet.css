@@ -47,6 +47,7 @@ a.pt-tweet-buttons svg {
   height: 15px;
   width: 15px;
   margin: 0 auto;
+  vertical-align: middle;
 }
 
 a.pt-tweet-buttons.disabled svg g {
@@ -62,4 +63,11 @@ span.pt-ticket-created {
   font-size: 11px;
   padding-top: 5px;
   text-align: right;
+}
+
+.twitter-logo img {
+  height: 16px;
+  width: 16px;
+  margin-right: 24px;
+  margin-left: 24px;
 }

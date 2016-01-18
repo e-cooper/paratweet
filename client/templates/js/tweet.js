@@ -6,8 +6,6 @@ Template.tweet.onRendered(function () {
     SVGInjector(mySVGsToInject, injectorOptions, function () {
         this.$('.tooltipped').tooltip();
     });
-
-    debugger;
 });
 
 Template.tweet.helpers({
@@ -26,24 +24,12 @@ Template.tweet.helpers({
         return TicketComments.find({"parent.id_str": this.content.id_str});
     },
     tweetText: function () {
-        var plainText = this.content.text;
-        var endResult = plainText;
-        var urls = this.content.entities.urls;
         var media = this.content.entities.media;
-
-        if (urls && urls.length) {
-            urls.forEach(function (element, index, array) {
-                endResult = endResult.slice(0, element.indices[0])
-                            + '<a href="'
-                            + element.url
-                            + '" title="'
-                            + element.expanded_url
-                            + '">'
-                            + element.display_url
-                            + '</a>'
-                            + endResult.slice(element.indices[1]);
-            });
-        }
+        var urls = this.content.entities.urls;
+        var allLinkableEntities = media ? urls.concat(media) : urls;
+        var endResult = TwitterText.autoLink(this.content.text, {
+            urlEntities: allLinkableEntities
+        });
 
         if (media && media.length) {
             media.forEach(function (element, index, array) {

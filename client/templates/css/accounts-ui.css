@@ -5,6 +5,7 @@
 }
 
 .btn-Twitter:focus, .btn-Twitter:hover {
+  background-color: rgba(138, 193, 60, .9);
   color: #fff;
 }
 

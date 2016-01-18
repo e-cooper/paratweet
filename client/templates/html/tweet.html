@@ -16,9 +16,12 @@
           </p>
         </div>
         <div class="col-xs-6">
-          <p class="text-right pt-color-lt-gray">
+          <span class="pull-right pt-color-lt-gray">
             {{moFormat createdAt 'h:mm a MMM Do'}}
-          </p>
+          </span>
+          <a href="https://twitter.com/{{content.user.screen_name}}/status/{{content.id_str}}" class="twitter-logo pull-right" target="_blank">
+            <img class="tooltipped" src="/images/Twitter_logo_blue_32.png" alt="Twitter Logo" data-toggle="tooltip" data-placement="top" title="Go to Status">
+          </a>
         </div>
       </div>
       <p class="pt-tweet-text">
@@ -32,7 +35,7 @@
         </a>
 
         <a href="#" class="pt-tweet-buttons openModal" data-modal-template="postTicketCommentModal">
-          <img class="svg tooltipped" src="/images/add-to-existing.svg" alt="Add Comment to Existing Ticket" data-toggle="tooltip" data-placement="top" title="Add Comment">
+          <img class="svg tooltipped" src="/images/add-to-existing.svg" alt="Add Ticket Comment" data-toggle="tooltip" data-placement="top" title="Add Ticket Comment">
         </a>
 
         <a href="#" class="pt-tweet-buttons openModal" data-modal-template="postReplyModal">
