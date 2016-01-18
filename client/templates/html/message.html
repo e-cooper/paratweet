@@ -4,9 +4,9 @@
       <img src={{biggerProfileImageUrl}} class="img-responsive center-block" alt="Profile image">
     </div>
     <div class="col-sm-8 pt-col-no-padding">
-      <div class="row">
-        <div class="col-xs-6">
-          <p class="pt-account-group pt-color-blue">
+      <div class="row pt-row-margin">
+        <div class="col-xs-12">
+          <span class="pt-account-group pt-color-blue">
             <a href="https://twitter.com/{{content.sender.screen_name}}" target="_blank">
               <span class="pt-user-name pt-color-blue">
                 {{content.sender.name}}
@@ -15,20 +15,17 @@
                 @{{content.sender.screen_name}}
               </span>
             </a>
-          </p>
-        </div>
-        <div class="col-xs-6">
-          <span class="pull-right pt-color-lt-gray">
-            {{moFormat createdAt 'h:mm a MMM Do'}}
           </span>
-          <a href="https://twitter.com/{{content.recipient.screen_name}}" class="twitter-logo pull-right" target="_blank">
-            <img class="tooltipped" src="/images/Twitter_logo_blue_32.png" alt="Twitter Logo" data-toggle="tooltip" data-placement="top" title="Go to Twitter">
-          </a>
+          <span class="pull-right pt-color-lt-gray">
+            {{moFormat createdAt 'h:mm a - MMM D'}}
+          </span>
         </div>
       </div>
-      <p class="pt-tweet-text">
-        {{{messageText}}}
-      </p>
+      <div class="row pt-tweet-text">
+        <div class="col-xs-12">
+          {{{messageText}}}
+        </div>
+      </div>
     </div>
     <div class="col-sm-2">
       <div class="pt-tweet-buttons-container pull-right">
@@ -37,7 +34,7 @@
         </a>
 
         <a href="#" class="pt-tweet-buttons openModal" data-modal-template="postTicketCommentModal">
-          <img class="svg tooltipped" src="/images/add-to-existing.svg" alt="Add Ticket Comment" data-toggle="tooltip" data-placement="top" title="Comment on Existing Ticket">
+          <img class="svg tooltipped" src="/images/add-to-existing.svg" alt="Add Ticket Comment" data-toggle="tooltip" data-placement="top" title="Add Ticket Comment">
         </a>
 
         <a href="#" class="pt-tweet-buttons openModal" data-modal-template="postReplyMessageModal">
@@ -47,9 +44,12 @@
       {{#with existingTicket}}
         <div class="pt-ticket-message">
           <span class="pt-ticket-created pt-color-lt-gray">Ticket Created</span>
-          <span class="pt-ticket-created pt-color-lt-gray">{{moFormat content.created_at 'h:mm a MMM Do' }}</span>
+          <span class="pt-ticket-created pt-color-lt-gray">{{moFormat content.created_at 'h:mm a - MMM D' }}</span>
         </div>
       {{/with}}
+      <a href="https://twitter.com/{{content.recipient.screen_name}}" class="twitter-logo pull-right" target="_blank">
+        <img class="tooltipped" src="/images/Twitter_logo_blue_32.png" alt="Twitter Logo" data-toggle="tooltip" data-placement="top" title="Go to Twitter">
+      </a>
     </div>
   </div>
 </template>

@@ -9,7 +9,7 @@ body.pg-loaded > .inner {
 }
 
 .pt-nav-container {
-  background-color: #127B9C;
+  background-color: #fff;
 }
 
 .pt-nav-container .container {
@@ -18,35 +18,35 @@ body.pg-loaded > .inner {
 }
 
 .pt-navbar {
-  background-color: #127B9C;
+  background-color: #fff;
   border: none;
   border-radius: 0;
-  color: #fff;
+  color: rgb(97, 193, 122);;
   margin-bottom: 0;
 }
 
 .pt-navbar .navbar-brand {
-  color: #fff;
+  color: rgb(97, 193, 122);
 }
 
 .pt-navbar .navbar-brand:hover, .pt-navbar .navbar-brand:focus {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(97, 193, 122, 0.9);
 }
 
-.pt-navbar .navbar-nav > li > a {
-  color: #fff;
+.pt-navbar .navbar-nav.pt-color-lt-green > li > a {
+  color: rgb(97, 193, 122);
 }
 
-.pt-navbar .navbar-nav > li > a:hover, .pt-navbar .navbar-nav > li > a:focus {
-  color: rgba(255, 255, 255, 0.9);
+.pt-navbar .navbar-nav.pt-color-lt-green > li > a:hover, .pt-navbar .navbar-nav > li > a:focus {
+  color: rgba(97, 193, 122, 0.9);
 }
 
-.pt-navbar .navbar-nav > .open > a {
-  background-color: #fff;
+.pt-navbar .navbar-nav.pt-color-lt-green > .open > a {
+  background-color: rgb(97, 193, 122);
 }
 
-.pt-navbar .navbar-nav > .open > a:hover, .pt-navbar .navbar-nav > .open > a:focus {
-  background-color: rgba(255, 255, 255, 0.9);
+.pt-navbar .navbar-nav.pt-color-lt-green > .open > a:hover, .pt-navbar .navbar-nav > .open > a:focus {
+  background-color: rgba(97, 193, 122, 0.9);
 }
 
 .pt-load-new-btn,
@@ -57,5 +57,5 @@ body.pg-loaded > .inner {
 .pt-load-new-btn:active:focus {
   border: none;
   border-radius: 0;
-  background-color: #0C5971;
+  background-color: rgb(97, 193, 122);
 }

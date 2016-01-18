@@ -3,8 +3,13 @@
 }
 
 .pt-tweet {
+  position: relative;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.pt-tweet [class*="col-"] {
+  position: relative;
 }
 
 .pt-account-group {
@@ -43,8 +48,15 @@
   width: auto;
 }
 
-.pt-tweet-buttons-container, .pt-ticket-message {
-  display: block;
+.pt-tweet-buttons-container,
+.pt-ticket-message {
+  isplay: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  width: 100%;
+  justify-content: space-between;
+
 }
 
 a.pt-tweet-buttons {
@@ -63,6 +75,10 @@ a.pt-tweet-buttons svg {
   vertical-align: middle;
 }
 
+a.pt-tweet-buttons svg g {
+  fill: rgb(193, 45, 81);
+}
+
 a.pt-tweet-buttons.disabled svg g {
   fill: #BAB2B9;
 }
@@ -79,8 +95,8 @@ span.pt-ticket-created {
 }
 
 .twitter-logo img {
+  margin-top: 16px;
+  margin-right: 6px;
   height: 16px;
   width: 16px;
-  margin-right: 24px;
-  margin-left: 24px;
 }

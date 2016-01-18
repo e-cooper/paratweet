@@ -5,8 +5,10 @@
 
 /**
  * colors
+ * lt-green: #61C17A; rgb(97, 193, 122);
  * green: #8AC13C; rgb(138, 193, 60);
  * blue: #127B9C;
+ * dark-pink: #C12D51; rgb(193, 45, 81);
  */
 
 body {
@@ -23,8 +25,16 @@ body {
   padding-right: 0 !important;
 }
 
+.pt-row-margin {
+  margin-bottom: 10px;
+}
+
 .pt-color-green {
   color: #8AC13C;
+}
+
+.pt-color-lt-green {
+  color: #61C17A;
 }
 
 .pt-color-lt-gray {
@@ -124,4 +134,23 @@ button.btn-link, button.btn-link:hover, button.btn-link:focus {
 
 .modal-footer .btn + .btn {
   margin-left: 10px;
+}
+
+/**
+ * Other styles to be overridden
+ */
+
+.btn-Twitter {
+  background-color: #8AC13C;
+  padding: 25px;
+  font-size: 18px;
+}
+
+.btn-Twitter:focus, .btn-Twitter:hover {
+  background-color: rgba(138, 193, 60, .9);
+  color: #fff;
+}
+
+.navbar-form {
+  padding: 0;
 }

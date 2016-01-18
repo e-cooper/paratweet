@@ -10,7 +10,7 @@ Template.tweet.onRendered(function () {
 
 Template.tweet.helpers({
     biggerProfileImageUrl: function () {
-        return this.content.user.profile_image_url.replace(/normal/i, "bigger");
+        return this.content.user.profile_image_url_https.replace(/normal/i, "bigger");
     },
     disabledTicketButton: function () {
         if (Tickets.find({"parent.id_str": this.content.id_str}).count() > 0) {
@@ -28,7 +28,9 @@ Template.tweet.helpers({
         var urls = this.content.entities.urls;
         var allLinkableEntities = media ? urls.concat(media) : urls;
         var endResult = TwitterText.autoLink(this.content.text, {
-            urlEntities: allLinkableEntities
+            urlEntities: allLinkableEntities,
+            targetBlank: true,
+            usernameIncludeSymbol: true
         });
 
         if (media && media.length) {
