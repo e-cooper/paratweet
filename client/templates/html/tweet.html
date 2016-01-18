@@ -6,13 +6,15 @@
     <div class="col-sm-8 pt-col-no-padding">
       <div class="row">
         <div class="col-xs-6">
-          <p class="pt-screen-name pt-color-blue">
-            {{content.user.name}}
-            <span>
-              <a class="pt-color-green" href="https://twitter.com/{{content.user.screen_name}}" target="_blank">
+          <p class="pt-account-group pt-color-blue">
+            <a href="https://twitter.com/{{content.user.screen_name}}" target="_blank">
+              <span class="pt-user-name pt-color-blue">
+                {{content.user.name}}
+              </span>
+              <span class="pt-screen-name pt-color-green">
                 @{{content.user.screen_name}}
-              </a>
-            </span>
+              </span>
+            </a>
           </p>
         </div>
         <div class="col-xs-6">

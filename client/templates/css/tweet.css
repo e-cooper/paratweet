@@ -7,16 +7,29 @@
   padding-bottom: 20px;
 }
 
-.pt-screen-name {
+.pt-account-group {
   font-size: 18px;
 }
 
-.pt-screen-name span {
+.pt-account-group a:hover,
+.pt-account-group a:focus {
+  text-decoration: none;
+}
+
+.pt-account-group a:hover .pt-user-name,
+.pt-account-group a:focus .pt-user-name {
+  color: rgb(18, 123, 156);
+  text-decoration: underline;
+}
+
+.pt-account-group span {
   font-size: 14px;
 }
 
-.pt-screen-name span a:hover, .pt-screen-name span a:focus {
+.pt-account-group a:hover .pt-screen-name,
+.pt-account-group a:focus .pt-screen-name {
   color: #8AC13C;
+  text-decoration: none;
 }
 
 .pt-tweet-text {
