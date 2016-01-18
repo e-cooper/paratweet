@@ -41,15 +41,16 @@
           <img class="svg tooltipped" src="/images/reply.svg" alt="Reply" data-toggle="tooltip" data-placement="top" title="Reply">
         </a>
       </div>
-      {{#with existingTicket}}
-        <div class="pt-ticket-message">
-          <span class="pt-ticket-created pt-color-lt-gray">Ticket Created</span>
-          <span class="pt-ticket-created pt-color-lt-gray">{{moFormat content.created_at 'h:mm a - MMM D' }}</span>
-        </div>
-      {{/with}}
       <a href="https://twitter.com/{{content.user.screen_name}}/status/{{content.id_str}}" class="twitter-logo pull-right" target="_blank">
         <img class="tooltipped" src="/images/Twitter_logo_blue_32.png" alt="Twitter Logo" data-toggle="tooltip" data-placement="left" title="Go to status">
       </a>
+      {{#with existingTicket}}
+        <div class="pt-ticket-message">
+          <span class="pt-ticket-created pt-color-lt-gray">
+            Ticket Created {{moFormat content.created_at 'h:mm a - MMM D' }}
+          </span>
+        </div>
+      {{/with}}
     </div>
   </div>
 </template>
