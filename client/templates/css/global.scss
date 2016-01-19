@@ -4,15 +4,29 @@
  */
 
 /**
- * colors
- * lt-green: #61C17A; rgb(97, 193, 122);
- * green: #8AC13C; rgb(138, 193, 60);
- * blue: #127B9C;
- * dark-pink: #C12D51; rgb(193, 45, 81);
+ * Variables
+ */
+
+$pt-default-fonts: 'Raleway', sans-serif;
+
+$pt-green: #61C17A;
+
+$pt-lt-pink: #f2bdbd;
+$pt-pink: #C12D51;
+
+$pt-lt-blue: #e5f0f3;
+$pt-deep-blue: #127B9C;
+
+$pt-lt-gray: #f5f5f5;
+$pt-med-gray: #878186;
+$pt-inactive-gray: #B8B3B8;
+
+/**
+ * Styles
  */
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: $pt-default-fonts;
 }
 
 [class*="col-"].pt-col-no-padding {
@@ -30,23 +44,21 @@ body {
 }
 
 .pt-color-green {
-  color: #8AC13C;
-}
-
-.pt-color-lt-green {
-  color: #61C17A;
+  color: $pt-green;
 }
 
 .pt-color-lt-gray {
-  color: #BAB2B9;
+  color: $pt-inactive-gray;
 }
 
 .pt-color-blue {
-  color: rgb(18, 123, 156);
+  color: $pt-deep-blue;
 }
 
-button.btn-link, button.btn-link:hover, button.btn-link:focus {
-  color: #8AC13C;
+button.btn-link,
+button.btn-link:hover,
+button.btn-link:focus {
+  color: $pt-green;
 }
 
 .pt-alerts .alert {
@@ -55,8 +67,23 @@ button.btn-link, button.btn-link:hover, button.btn-link:focus {
   border-radius: 0;
 }
 
+.btn-Twitter {
+  background-color: $pt-green;
+  padding: 25px;
+  font-size: 18px;
+  &:focus,
+  &:hover {
+    background-color: lighten($pt-green, 10%);
+    color: #fff;
+  }
+}
+
+.navbar-form {
+  padding: 0;
+}
+
 /**
- * modal styles, overriding bootstrap styles
+ * Modal styles, overriding bootstrap styles
  */
 
 .modal-content {
@@ -64,7 +91,7 @@ button.btn-link, button.btn-link:hover, button.btn-link:focus {
 }
 
 .modal-header {
-  background-color: #127B9C;
+  background-color: $pt-deep-blue;
   border: none;
   color: #fff;
   padding: 10px 30px;
@@ -94,7 +121,7 @@ button.btn-link, button.btn-link:hover, button.btn-link:focus {
 .modal-body .form-control {
   border: none;
   box-shadow: none;
-  background-color: #f5f5f5;
+  background-color: $pt-lt-gray;
 }
 
 .modal-footer {
@@ -108,49 +135,30 @@ button.btn-link, button.btn-link:hover, button.btn-link:focus {
 }
 
 .modal-footer .btn-primary {
-  background-color: #8AC13C;
+  background-color: $pt-green;
   border: none;
 }
 
 .modal-footer .btn-primary:hover,
 .modal-footer .btn-primary:active,
 .modal-footer .btn-primary:focus {
-  background-color: rgba(138, 193, 60, .9);
+  background-color: lighten($pt-green, 10%);
   border: none;
 }
 
 .modal-footer .btn-default {
-  background-color: #f5f5f5;
+  background-color: $pt-lt-gray;
   border: none;
-  color: #878186;
+  color: $pt-med-gray;
 }
 
 .modal-footer .btn-default:hover,
 .modal-footer .btn-default:active,
 .modal-footer .btn-default:focus {
-  background-color: #e6e6e6;
+  background-color: darken($pt-lt-gray, 10%);
   border: none;
 }
 
 .modal-footer .btn + .btn {
   margin-left: 10px;
-}
-
-/**
- * Other styles to be overridden
- */
-
-.btn-Twitter {
-  background-color: #8AC13C;
-  padding: 25px;
-  font-size: 18px;
-}
-
-.btn-Twitter:focus, .btn-Twitter:hover {
-  background-color: rgba(138, 193, 60, .9);
-  color: #fff;
-}
-
-.navbar-form {
-  padding: 0;
 }

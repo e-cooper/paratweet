@@ -29,7 +29,7 @@
     </div>
     <div class="col-sm-2">
       <div class="pt-tweet-buttons-container pull-right">
-        <a href="#" class="pt-tweet-buttons openModal {{disabledTicketButton}}" data-modal-template="postTicketModal">
+        <a href="#" class="pt-tweet-buttons openModal {{#if disabledTicketButton}}disabled{{/if}}" data-modal-template="postTicketModal">
           <img class="svg tooltipped" src="/images/create.svg" alt="Create Ticket" data-toggle="tooltip" data-placement="top" title="New Ticket">
         </a>
 

@@ -1,4 +1,22 @@
 Template.postTicketCommentModal.onRendered(function () {
+    if (Session.get('loadedTickets')) {
+        Session.set('loadedTickets', false);
+
+        var openTickets = [];
+        var openTicketsPromise = card.services('helpdesk').request('tickets', {
+            per_page: 100,
+            status: 'open'
+        });
+        ticketsPromiseLoop(openTicketsPromise, openTickets, function (data) {
+            openTickets = openTickets.concat(data.tickets);
+            return {
+                openTickets: openTickets,
+                done: data.meta.current_page >= data.meta.page_count,
+                value: ++data.meta.current_page
+            };
+        });
+    }
+
     if (Session.get('currentTargetContent')) {
         var body = $('textarea#ticket-comment-body');
         var senderScreenName =
@@ -16,6 +34,9 @@ Template.postTicketCommentModal.onRendered(function () {
 });
 
 Template.postTicketCommentModal.helpers({
+    checkIfLoaded: function () {
+        return Session.get('loadedTickets');
+    },
     openTickets: function () {
         return Session.get('openTickets');
     }

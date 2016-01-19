@@ -1,3 +1,5 @@
+@import "{}/client/templates/css/global.scss";
+
 .pt-tweet:nth-child(2n+1) {
   background-color: #FBFBFB;
 }
@@ -33,8 +35,12 @@
 
 .pt-account-group a:hover .pt-screen-name,
 .pt-account-group a:focus .pt-screen-name {
-  color: #8AC13C;
+  color: $pt-green;
   text-decoration: none;
+}
+
+.pt-account-group span.pt-user-name {
+  font-size: 20px;
 }
 
 .pt-tweet-text {
@@ -76,11 +82,11 @@ a.pt-tweet-buttons svg {
 }
 
 a.pt-tweet-buttons svg g {
-  fill: rgb(193, 45, 81);
+  fill: $pt-pink;
 }
 
 a.pt-tweet-buttons.disabled svg g {
-  fill: #BAB2B9;
+  fill: $pt-med-gray;
 }
 
 .pt-ticket-message {

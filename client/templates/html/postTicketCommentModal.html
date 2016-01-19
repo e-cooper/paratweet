@@ -15,6 +15,12 @@
             <div class="form-group">
               <label for="ticket-select" class="control-label">
                 Ticket
+                {{#unless checkIfLoaded}}
+                  <div class="pt-modal-spinner sk-spinner sk-spinner-double-bounce">
+                    <div class="sk-double-bounce1"></div>
+                    <div class="sk-double-bounce2"></div>
+                  </div>
+                {{/unless}}
               </label>
               <select class="form-control" id="ticket-select">
                 {{#each openTickets}}

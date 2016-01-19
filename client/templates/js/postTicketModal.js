@@ -1,4 +1,20 @@
 Template.postTicketModal.onRendered(function () {
+    if (Session.get('loadedUsers')) {
+        Session.set('loadedUsers', false);
+        var users = [];
+        var proUsersPromise = card.services('environment').request('users', {
+            per_page: 100
+        });
+        proUsersPromiseLoop(proUsersPromise, users, function (data) {
+            users = users.concat(data.users);
+            return {
+                users: users,
+                done: data.meta.current_page >= data.meta.page_count,
+                value: ++data.meta.current_page
+            };
+        });
+    }
+
     if (Session.get('currentTargetContent')) {
         var description = $('textarea#ticket-description');
         var senderScreenName =
@@ -16,6 +32,9 @@ Template.postTicketModal.onRendered(function () {
 });
 
 Template.postTicketModal.helpers({
+    checkIfLoaded: function () {
+        return Session.get('loadedUsers');
+    },
     proUsers: function () {
         return Session.get('proUsers');
     },

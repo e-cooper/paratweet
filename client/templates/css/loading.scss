@@ -1,0 +1,45 @@
+@import "{}/client/templates/css/global.scss";
+
+.pg-loading-screen .pg-loading-html {
+  margin-top: 50px;
+}
+
+.pg-loading-screen .pg-loading-center-middle {
+  vertical-align: top;
+  padding-top: 100px;
+}
+
+.pg-loading-screen .pg-loading-logo-header img {
+  width: 50px;
+}
+
+.pg-loading-screen .pg-loading-html {
+  position: absolute;
+  top: 95px;
+  margin-top: 0;
+  z-index: -1;
+}
+
+.loading-message {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 300;
+  font-family: sans-serif;
+}
+
+.sk-spinner-double-bounce.sk-spinner {
+  width: 100px;
+  height: 100px;
+}
+
+.sk-spinner-double-bounce .sk-double-bounce1,
+.sk-spinner-double-bounce .sk-double-bounce2 {
+  background-color: $pt-lt-pink;
+}
+
+.pt-modal-spinner.sk-spinner.sk-spinner-double-bounce {
+  width: 20px;
+  height: 20px;
+  float: right;
+  margin-left: 10px;
+}

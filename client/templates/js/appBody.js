@@ -13,8 +13,9 @@ Template.appBody.helpers({
 });
 
 Template.appBody.events({
-    "click a.openModal": function (event, template) {
-        var name = template.$(event.target).closest('a.openModal').data('modal-template');
+    "click a.feedbackModal": function (event, template) {
+        console.log("hit");
+        var name = template.$(event.target).closest('a.feedbackModal').data('modal-template');
         Modal.show(name);
     },
     "click .pt-load-new-btn": function () {

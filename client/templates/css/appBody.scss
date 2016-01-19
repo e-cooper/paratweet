@@ -1,3 +1,5 @@
+@import "{}/client/templates/css/global.scss";
+
 /* TODO: UNCOMMENT THIS WHEN READY;
 body > .inner {
   display: none;
@@ -21,32 +23,38 @@ body.pg-loaded > .inner {
   background-color: #fff;
   border: none;
   border-radius: 0;
-  color: rgb(97, 193, 122);;
+  color: $pt-green;
   margin-bottom: 0;
+  font-size: 16px;
 }
 
 .pt-navbar .navbar-brand {
-  color: rgb(97, 193, 122);
+  color: $pt-green;
+  padding: 10px;
+}
+
+.pt-navbar .navbar-brand img {
+  width: 220px;
 }
 
 .pt-navbar .navbar-brand:hover, .pt-navbar .navbar-brand:focus {
-  color: rgba(97, 193, 122, 0.9);
+  color: lighten($pt-green, 10%);
 }
 
-.pt-navbar .navbar-nav.pt-color-lt-green > li > a {
-  color: rgb(97, 193, 122);
+.pt-navbar .navbar-nav > li > a {
+  color: $pt-green;
 }
 
-.pt-navbar .navbar-nav.pt-color-lt-green > li > a:hover, .pt-navbar .navbar-nav > li > a:focus {
-  color: rgba(97, 193, 122, 0.9);
+.pt-navbar .navbar-nav > li > a:hover, .pt-navbar .navbar-nav > li > a:focus {
+  color: lighten($pt-green, 10%);
 }
 
-.pt-navbar .navbar-nav.pt-color-lt-green > .open > a {
-  background-color: rgb(97, 193, 122);
+.pt-navbar .navbar-nav > .open > a {
+  background-color: $pt-green;
 }
 
-.pt-navbar .navbar-nav.pt-color-lt-green > .open > a:hover, .pt-navbar .navbar-nav > .open > a:focus {
-  background-color: rgba(97, 193, 122, 0.9);
+.pt-navbar .navbar-nav > .open > a:hover, .pt-navbar .navbar-nav > .open > a:focus {
+  background-color: lighten($pt-green, 10%);
 }
 
 .pt-load-new-btn,
@@ -57,5 +65,5 @@ body.pg-loaded > .inner {
 .pt-load-new-btn:active:focus {
   border: none;
   border-radius: 0;
-  background-color: rgb(97, 193, 122);
+  background-color: $pt-green;
 }

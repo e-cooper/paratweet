@@ -14,11 +14,13 @@ Template.message.helpers({
     },
     disabledTicketButton: function () {
         if (Tickets.find({"parent.id_str": this.content.id_str}).count() > 0) {
-            return "disabled";
+            return true;
+        } else {
+            return false;
         }
     },
     existingTicket: function () {
-        return Tickets.findOne({"parent.id_str": this.content.id_str});
+        return Tickets.findOne({"parent.id_str": this.content.id_str}, {sort: {createdAt: -1}});
     },
     existingComment: function () {
         return TicketComments.find({"parent.id_str": this.content.id_str});
@@ -49,10 +51,8 @@ Template.message.helpers({
 
 Template.message.events({
     "click a.openModal": function (event, template) {
-        if (!event.target.closest('a.disabled')) {
-            var name = template.$(event.target).closest('a.openModal').data('modal-template');
-            Session.set('currentTargetContent', this.content);
-            Modal.show(name);
-        }
+        var name = template.$(event.target).closest('a.openModal').data('modal-template');
+        Session.set('currentTargetContent', this.content);
+        Modal.show(name);
     }
 });

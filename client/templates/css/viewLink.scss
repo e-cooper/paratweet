@@ -1,3 +1,5 @@
+@import "{}/client/templates/css/global.scss";
+
 .pt-viewLink:hover, .pt-viewLink:focus {
   color: #127B9C;
   text-decoration: none;
@@ -5,23 +7,29 @@
 
 .pt-viewLink-text {
   display: inline-block;
-  border-bottom: 2px solid #127B9C;
+  border-bottom: 3px solid $pt-deep-blue;
   position: relative;
 }
 
 .pt-viewLink-text.inactive {
   border: none;
-  color: rgb(184, 179, 184);
+  color: $pt-inactive-gray;
+  &:hover,
+  &:focus,
+  &:active {
+    color: darken($pt-inactive-gray, 10%);
+  }
 }
 
 h4.pt-viewLink-text {
   margin-top: 0;
   margin-bottom: 0;
-  padding: 15px 15px;
+  padding: 15px 15px 12px 15px;
+  font-size: 20px;
 }
 
 .pt-viewLink-text img {
-  height: 14px;
+  height: 12px;
   position: absolute;
   right: 0;
   top: 8px;

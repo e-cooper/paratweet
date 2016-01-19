@@ -13,7 +13,7 @@ Template.postContactModal.events({
             if (error) {
                 FlashMessages.sendError(error);
             } else {
-                FlashMessages.sendSuccess("Message sent successfully.")
+                FlashMessages.sendSuccess("Message sent successfully.");
             }
         });
         Modal.hide();

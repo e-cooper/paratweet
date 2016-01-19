@@ -23,7 +23,7 @@ Template.postFeedbackModal.events({
             if (error) {
                 FlashMessages.sendError(error);
             } else {
-                FlashMessages.sendSuccess("Feedback sent successfully.")
+                FlashMessages.sendSuccess("Feedback sent successfully.");
             }
         });
         Modal.hide();

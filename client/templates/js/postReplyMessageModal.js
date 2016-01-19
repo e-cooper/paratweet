@@ -15,7 +15,7 @@ Template.postReplyMessageModal.events({
             Modal.hide();
         } else {
             Modal.hide();
-            FlashMessages.sendError("Message text required.")
+            FlashMessages.sendError("Message text required.");
         }
     }
 });

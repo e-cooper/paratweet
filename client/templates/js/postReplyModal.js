@@ -27,7 +27,7 @@ Template.postReplyModal.events({
             Modal.hide();
         } else {
             Modal.hide();
-            FlashMessages.sendError("Your reply body is not an acceptable length: must be between 1 and 140 characters.")
+            FlashMessages.sendError("Your reply body is not an acceptable length: must be between 1 and 140 characters.");
         }
     },
     "input textarea#reply-body": function(event, template) {

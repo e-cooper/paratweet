@@ -1,3 +1,5 @@
+@import "{}/client/templates/css/global.scss";
+
 .pt-banner {
   position: relative;
 }
@@ -15,6 +17,12 @@
   display: inline-block;
   padding: 20px;
   width: auto;
+  h2 {
+    font-size: 48px;
+  }
+  h4 {
+    font-size: 26px;
+  }
 }
 
 .pt-screen-name-container.pt-col-abs h2 {

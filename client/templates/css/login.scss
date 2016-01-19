@@ -1,5 +1,7 @@
+@import "{}/client/templates/css/global.scss";
+
 .pt-login-page {
-  background-color: rgb(230, 240, 243);
+  background-color: $pt-lt-blue;
   height: 100vh;
 }
 
@@ -15,18 +17,16 @@
   -moz-box-shadow:    0 0 8px -1px #999;
   -webkit-box-shadow: 0 0 8px -1px #999;
   box-shadow:         0 0 8px -1px #999;
-}
-
-.pt-login-block h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-.pt-login-block h4 {
-  margin-bottom: 40px;
-}
-
-.pt-login-block button.btn-link {
-  font-size: 16px;
-  margin-top: 12px;
+  img {
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 340px;
+  }
+  h4 {
+    margin-bottom: 40px;
+  }
+  button.btn-link {
+    font-size: 16px;
+    margin-top: 12px;
+  }
 }

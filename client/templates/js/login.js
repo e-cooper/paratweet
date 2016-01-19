@@ -1,5 +1,5 @@
 Template.login.events({
-    "click .btn-link.openModal": function (event, template) {
+    "click .btn-link.contactModal": function (event, template) {
         Modal.show('postContactModal');
     }
 });

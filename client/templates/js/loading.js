@@ -1,8 +1,8 @@
 Template.loading.onRendered(function () {
   if (!Session.get('loadingSplash')) {
     this.loading = window.pleaseWait({
-      logo: '',
-      backgroundColor: '#82cb1c',
+      logo: '/images/pt-logo-icon.png',
+      backgroundColor: '#e5f0f3',
       loadingHtml: spinner
     });
     Session.set('loadingSplash', true);
@@ -15,10 +15,7 @@ Template.loading.onDestroyed(function () {
   }
 });
 
-var spinner = '<div class="sk-spinner sk-spinner-wave">'
-  + ' <div class="sk-rect1"></div>'
-  + ' <div class="sk-rect2"></div>'
-  + ' <div class="sk-rect3"></div>'
-  + ' <div class="sk-rect4"></div>'
-  + ' <div class="sk-rect5"></div>'
-  + '</div>';
+var spinner = '<div class="sk-spinner sk-spinner-double-bounce">'
+  + ' <div class="sk-double-bounce1"></div>'
+  + ' <div class="sk-double-bounce2"></div>'
+  + ' </div>';
