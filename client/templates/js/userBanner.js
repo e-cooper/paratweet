@@ -6,7 +6,7 @@ Template.userBanner.helpers({
             if (bannerImage) {
                 return bannerImage.sizes["1500x500"].url;
             } else {
-                return "/images/default-banner.jpg";
+                return "/images/light-blue-background.jpg";
             }
         }
     },
