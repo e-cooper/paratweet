@@ -51,38 +51,36 @@ function requestTwitterData () {
 
     for (let u of compacted) {
         var user = Meteor.users.findOne(u);
-        console.log("auto getting rate limits");
+
+        // Fetch rate limits so we can make sure we won't go over them
         Meteor.call("getRateLimits", user, function (error, result) {
             if (error) console.log(error);
         });
 
-        // refetch user since rate limit will change it
+        // Reassign user since rate limit will change it
         user = Meteor.users.findOne(u);
+
+        // Fetch tweets
         var statusRateLimit = user.services.twitter.rate_limits.resources.statuses["/statuses/mentions_timeline"].remaining;
-        console.log(statusRateLimit);
         if (statusRateLimit > 0) {
-            // TODO: remove later
-            console.log("auto getting tweets");
             Meteor.call("getTweets", user, function (error, result) {
                 if (error) console.log(error);
             });
         }
 
+        // Fetch messages
         var messageRateLimit = user.services.twitter.rate_limits.resources.direct_messages["/direct_messages"].remaining;
-        console.log(messageRateLimit);
         if (messageRateLimit > 0) {
-            // TODO: remove later
-            console.log("auto getting messages");
             Meteor.call("getMessages", user, function (error, result) {
                 if (error) console.log(error);
             });
         }
 
-        // TODO: remove later
-        console.log("auto getting banner image");
+        // Fetch banner image
         Meteor.call("getBannerImage", user, function (error, result) {
             if (error) console.log(error);
         });
     }
+    // Repeat this function after the interval
     Meteor.setTimeout(requestTwitterData, interval);
 }

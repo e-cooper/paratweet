@@ -14,7 +14,6 @@ Template.appBody.helpers({
 
 Template.appBody.events({
     "click a.feedbackModal": function (event, template) {
-        console.log("hit");
         var name = template.$(event.target).closest('a.feedbackModal').data('modal-template');
         Modal.show(name);
     },
