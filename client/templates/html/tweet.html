@@ -46,8 +46,10 @@
       </a>
       {{#with existingTicket}}
         <div class="pt-ticket-message">
-          <span class="pt-ticket-created pt-color-lt-gray">
-            Ticket Created {{moFormat content.created_at 'h:mm a - MMM D' }}
+          <span class="pt-ticket-created">
+            <a class="pt-ticket-created-link tooltipped" href="#" data-toggle="tooltip" data-placement="left" title="Go to Ticket">
+              Ticket #{{content.id}} created {{moFormat content.created_at 'h:mm a - MMM D' }}
+            </a>
           </span>
         </div>
       {{/with}}

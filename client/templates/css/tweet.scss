@@ -93,11 +93,20 @@ a.pt-tweet-buttons.disabled svg g {
   clear: both;
 }
 
-span.pt-ticket-created {
-  display: block;
-  font-size: 11px;
-  padding-top: 10px;
-  text-align: right;
+a.pt-ticket-created-link {
+  color: $pt-inactive-gray;
+  &:hover,
+  &:active,
+  &:focus {
+    color: $pt-inactive-gray;
+  }
+  span.pt-ticket-created {
+    display: block;
+    font-size: 10px;
+    padding-top: 10px;
+    text-align: right;
+
+  }
 }
 
 .twitter-logo img {

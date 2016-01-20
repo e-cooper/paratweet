@@ -42,13 +42,15 @@
         </a>
       </div>
       <a href="https://twitter.com/{{content.recipient.screen_name}}" class="twitter-logo pull-right" target="_blank">
-        <img class="tooltipped" src="/images/Twitter_logo_blue_32.png" alt="Twitter Logo" data-toggle="tooltip" data-placement="top" title="Go to Twitter">
+        <img class="tooltipped" src="/images/Twitter_logo_blue_32.png" alt="Twitter Logo" data-toggle="tooltip" data-placement="left" title="Go to Twitter">
       </a>
       {{#with existingTicket}}
         <div class="pt-ticket-message">
-          <span class="pt-ticket-created pt-color-lt-gray">
-            Ticket Created {{moFormat content.created_at 'h:mm a - MMM D' }}
-          </span>
+          <a class="pt-ticket-created-link tooltipped" href="#" data-toggle="tooltip" data-placement="left" title="Go to Ticket">
+            <span class="pt-ticket-created">
+              Ticket #{{content.id}} created {{moFormat content.created_at 'h:mm a - MMM D' }}
+            </span>
+          </a>
         </div>
       {{/with}}
     </div>

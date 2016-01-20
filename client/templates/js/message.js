@@ -20,10 +20,10 @@ Template.message.helpers({
         }
     },
     existingTicket: function () {
-        return Tickets.findOne({"parent.id_str": this.content.id_str}, {sort: {createdAt: -1}});
+        return Tickets.findOne({owner: Meteor.userId(), "parent.id_str": this.content.id_str}, {sort: {"content.created_at": -1}});
     },
     existingComment: function () {
-        return TicketComments.find({"parent.id_str": this.content.id_str});
+        return TicketComments.findOne({owner: Meteor.userId(), "parent.id_str": this.content.id_str}, {sort: {"content.created_at": -1}});
     },
     messageText: function () {
         var media = this.content.entities.media;
@@ -54,5 +54,8 @@ Template.message.events({
         var name = template.$(event.target).closest('a.openModal').data('modal-template');
         Session.set('currentTargetContent', this.content);
         Modal.show(name);
+    },
+    "click a.pt-ticket-created-link": function (event, template) {
+        card.services('environment').trigger('navigate', this.content.show_url);
     }
 });

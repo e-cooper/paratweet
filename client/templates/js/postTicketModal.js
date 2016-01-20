@@ -45,13 +45,6 @@ Template.postTicketModal.helpers({
 
 Template.postTicketModal.events({
     "click .postTicket": function () {
-        var currentTweetId = Session.get("currentTargetContent").id_str;
-        if (Tickets.find({"parent.id_str": currentTweetId}).count() > 0) {
-            FlashMessages.sendError("Ticket already submitted for this item");
-            Modal.hide();
-            return;
-        }
-
         if ($('input#ticket-summary').val().length) {
             card.services('helpdesk').request('ticket:create', {
                 summary: $('input#ticket-summary').val(),
