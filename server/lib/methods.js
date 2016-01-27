@@ -221,7 +221,8 @@ Meteor.methods({
         try {
             getMessagesResult = getMessagesCall('direct_messages', {
                 count: 200,
-                since_id: sinceId
+                since_id: sinceId,
+                full_text: true
             });
 
             timestamp = new Date();
